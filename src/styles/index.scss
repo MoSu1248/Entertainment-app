@@ -1,0 +1,9 @@
+/* Styles Hub */
+/* 1. Re-export foundations */
+
+@forward "./variables";
+@forward "./mixins";
+
+/* 2. Local stuff that doesn’t need forwarding */
+
+@use "./global.scss";
