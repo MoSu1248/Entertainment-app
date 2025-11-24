@@ -1,0 +1,32 @@
+/* Mixin Styling */
+
+@mixin text-styling(
+  $color: var(--primary-white),
+  $font-size: var(--text-preset-2-size),
+  $font-weight: var(--font-weight-regular),
+  $letter-spacing: var(--text-preset-1-spacing-other)
+) {
+  color: $color;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  letter-spacing: $letter-spacing;
+  line-height: var(--text-line-height);
+}
+
+
+@mixin button-styling {
+  // width: 100%;
+  padding: 1rem 6rem;
+  background-color: var(--primary-red-500);
+  border: none;
+  border-radius: 6px;
+  color: var(--primary-white);
+  cursor: pointer;
+  transition: all 0.4s ease-out;
+  @include text-styling(var(--primary-white), var(--text-preset-3-size));
+
+  &:hover {
+    background-color: var(--primary-white);
+    color: var(--primary-black);
+  }
+}
