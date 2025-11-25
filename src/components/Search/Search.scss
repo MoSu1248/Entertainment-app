@@ -1,0 +1,52 @@
+@use "../../styles/mixins" as *;
+
+.search {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+
+  &__wrapper {
+    position: relative;
+    width: 100%;
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 0rem;
+      bottom: 0;
+      left: 0;
+      height: 0.05rem;
+      background-color: var(--primary-blue-500);
+      z-index: 1;
+      transition: width 0.3s ease;
+    }
+
+    &:focus-within::after {
+      width: 50%;
+    }
+    &:hover::after {
+      width: 50%;
+    }
+  }
+
+  &__bar {
+    width: 50%;
+    background-color: transparent;
+    @include text-styling(
+      var(--primary-white),
+      var(--text-preset-3-size),
+      var(--font-weight-regular)
+    );
+    padding: 1rem;
+    outline: none;
+    border: none;
+  }
+
+  &__bar::placeholder {
+    @include text-styling(
+      var(--primary-grey),
+      var(--text-preset-3-size),
+      var(--font-weight-regular)
+    );
+  }
+}

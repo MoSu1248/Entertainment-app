@@ -1,0 +1,32 @@
+.navbar {
+  padding: 1.5rem 2rem;
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__container {
+    background-color: var(--primary-blue-900);
+    padding: 1.5rem;
+    height: 85%;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  &__avatar {
+    margin-top: auto;
+    border: 2px solid var(--primary-white);
+    border-radius: 50%;
+    height: fit-content;
+    width: fit-content;
+
+    img {
+      height: 2.5rem;
+      width: 2.5rem;
+    }
+  }
+}

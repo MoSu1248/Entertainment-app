@@ -1,13 +1,25 @@
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { useState } from "react";
 
-import Trending from "./pages/Home-Trending/Trending";
+import Home from "./pages/Home/Home";
 import Bookmarked from "./pages/Home-Bookmarked/Bookmarked";
 import Movies from "./pages/Home-Movies/Movies";
 import Series from "./pages/Home-Series/Series";
-import "./App.css";
+import Layout from "./components/Layout/Layout";
 
 function App() {
-  return <></>;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="/movies" element={<Movies/>}></Route>
+          <Route path="/series" element={<Series />} />
+          <Route path="/bookmarked" element={<Bookmarked />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
