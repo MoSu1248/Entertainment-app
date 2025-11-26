@@ -18,8 +18,8 @@ export default function Nav() {
     <div className="nav">
       <ul className="nav__list">
         {navLinks.map((link, index) => (
-          <li className="nav__item">
-            <NavLink key={index} to={link.url} className={`nav__link`}>
+          <li className="nav__item" key={index}>
+            <NavLink to={link.url} className={`nav__link`}>
               {link.icon}
             </NavLink>
           </li>

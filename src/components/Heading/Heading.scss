@@ -1,0 +1,11 @@
+@use "../../styles/mixins" as *;
+
+.heading {
+  &__text {
+    @include text-styling(
+      var(--primary-white),
+      var(--text-preset-1-size),
+      var(--font-weight-regular)
+    );
+  }
+}

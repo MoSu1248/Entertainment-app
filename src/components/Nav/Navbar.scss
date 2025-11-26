@@ -1,5 +1,7 @@
 .navbar {
   padding: 1.5rem 2rem;
+  position: fixed;
+  height: 80vh;
 
   &__logo {
     display: flex;
