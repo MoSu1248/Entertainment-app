@@ -3,18 +3,16 @@ import Catagory from "../../assets/icon-category-movie.svg?react";
 import CatagoryTv from "../../assets/icon-category-tv.svg?react";
 import Bookmark from "../../assets/icon-bookmark-empty.svg?react";
 import BookmarkedActive from "../../assets/icon-bookmark-full.svg?react";
-import "./Cards.scss";
+import "./TrendingCard.scss"
 
-export default function Card({ info, toggleBookmark }) {
+export default function TrendingCard({ info }) {
   return (
     <div className="card">
-      <div className="card__img">
-        <img src={info.thumbnail.regular.medium} alt="" />
-        <button onClick={() => toggleBookmark(info.title)}>
+        <img src={info.thumbnail.trending.large} alt="" className="card__background"/>
+        <button>
           {info.isBookmarked ? <BookmarkedActive /> : <Bookmark />}
         </button>
-      </div>
-      <div className="card__context">
+      <div className="trneding__card__context">
         <ul className="card__context-list">
           <li>{info.year}</li>
           <li className="list__item-catagory">

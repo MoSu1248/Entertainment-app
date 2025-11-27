@@ -7,7 +7,11 @@ export default function Search({ text }) {
     <div className="search">
       <SearchIcon />
       <div className="search__wrapper">
-        <input type="text" className="search__bar" placeholder={`${text}`} />
+        <input
+          type="text"
+          className="search__bar"
+          placeholder={`${text}`}
+        />
       </div>
     </div>
   );

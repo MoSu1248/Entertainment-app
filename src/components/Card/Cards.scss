@@ -1,7 +1,7 @@
 @use "../../styles/mixins" as *;
 
 .card {
-  width: fit-content;
+  // width: fit-content;
   height: fit-content;
   color: var(--primary-white);
   .card__img {
@@ -21,6 +21,13 @@
       border-radius: 50%;
       padding: 0.8rem;
       cursor: pointer;
+      color: var(--primary-white);
+      transition: 0.3s ease-in-out;
+
+      &:hover {
+        background-color: white;
+        color: var(--primary-black);
+      }
 
       svg {
         width: 20px;

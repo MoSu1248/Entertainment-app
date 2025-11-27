@@ -1,0 +1,47 @@
+.trending {
+  &__grid {
+    margin-top: 1rem;
+    display: flex; // lay items in a row
+    scroll-behavior: smooth; // nice smooth scroll
+    width: fit-content;
+    gap: 2.5rem;
+
+    .card {
+      position: relative;
+      width: 32rem;
+      height: 16rem;
+      border-radius: 8px;
+
+      button {
+        z-index: 100;
+        top: 0;
+        right: 0;
+      }
+    }
+
+    .card__background {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      z-index: -1;
+      border-radius: 8px;
+    }
+
+    .trneding__card__context {
+      position: absolute;
+      bottom: 15px;
+      left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .card__context-list li {
+      color: var(--primary-white);
+    }
+  }
+
+  //   &__grid::-webkit-scrollbar {
+  //   display: none;
+  // }
+}

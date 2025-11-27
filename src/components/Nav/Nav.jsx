@@ -9,9 +9,9 @@ import NavSeries from "../../assets/icon-nav-tv-series.svg?react";
 export default function Nav() {
   const navLinks = [
     { url: "/", icon: <NavHome /> },
-    { url: "/series", icon: <NavSeries /> },
-    { url: "/movies", icon: <NavMovies /> },
-    { url: "/bookmarked", icon: <NavBookmark /> },
+    { url: "/TV Series", icon: <NavSeries /> },
+    { url: "/Movie", icon: <NavMovies /> },
+    { url: "/Bookmarked", icon: <NavBookmark /> },
   ];
 
   return (
