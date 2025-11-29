@@ -1,6 +1,7 @@
 @use "../../styles/mixins" as *;
 
 .heading {
+  margin-bottom: 2rem;
   &__text {
     @include text-styling(
       var(--primary-white),
