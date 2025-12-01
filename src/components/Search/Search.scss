@@ -40,9 +40,12 @@
     padding: 1rem;
     outline: none;
     border: none;
+    font-family: var(--primary-font);
   }
 
   &__bar::placeholder {
+    font-family: var(--primary-font);
+
     @include text-styling(
       var(--primary-grey),
       var(--text-preset-3-size),

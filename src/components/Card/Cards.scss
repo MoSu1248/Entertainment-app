@@ -4,19 +4,21 @@
   // width: fit-content;
   height: fit-content;
   color: var(--primary-white);
+  cursor: pointer;
   .card__img {
     position: relative;
-
+    height: 14rem;
     img {
       width: 100%;
       border-radius: 8px;
+      height: 100%;
     }
 
-    button {
+    .card__bookmark-btn {
       position: absolute;
       top: 15px;
       right: 20px;
-      background-color: var(--primary-grey-light);
+    background-color: var(--primary-grey-dark);
       border: none;
       border-radius: 50%;
       padding: 0.8rem;
@@ -34,6 +36,47 @@
         height: 20px;
       }
     }
+  }
+
+  .overlay {
+    background-color: var(--primary-grey-dark);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 8px;
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s ease;
+
+    &__btn {
+      width: 40%;
+      background-color: var(--primary-grey-light);
+      border-radius: 10rem;
+      border: none;
+      padding: 1rem;
+      display: flex;
+      color: var(--primary-white);
+      cursor: pointer;
+    }
+
+    &__text {
+      margin-left: 1.5rem; 
+      @include text-styling(
+        var(
+          --primary-white,
+          var(--text-preset-3-size),
+          var(--font-weight-medium)
+        )
+      );
+    }
+  }
+
+  &:hover .overlay {
+    opacity: 1;
   }
 }
 

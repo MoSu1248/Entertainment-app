@@ -1,0 +1,75 @@
+@use "../../styles/mixins" as *;
+
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  gap: 5rem;
+
+  .logo {
+    margin-top: 5%;
+  }
+}
+
+.container {
+  background-color: var(--primary-blue-900);
+  padding: 2rem;
+  border-radius: 20px;
+  min-width: 400px;
+  min-height: 373px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 2rem;
+  transition: height 0.3s ease;
+
+  h1 {
+    @include text-styling(var(--primary-white), var(--text-preset-1-size), 200);
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .input {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid var(--primary-blue-500);
+    padding: 1rem;
+    font-size: var(--text-preset-4-size);
+    outline: none;
+    transition: 0.5s ease;
+    color: var(--primary-white);
+    font-family: var(--primary-font);
+    
+    &::placeholder {
+      color: var(--primary-grey);
+    }
+
+    &:focus {
+      border-bottom: 1px solid var(--primary-white);
+    }
+  }
+}
+
+.btn {
+  @include button-styling();
+  padding: 1rem;
+  width: 100%;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @include text-styling(var(--primary-white), var(--text-preset-4-size), 300);
+
+  span {
+    cursor: pointer;
+    color: var(--primary-red-500);
+    margin-left: 0.5rem;
+  }
+}

@@ -22,7 +22,8 @@
   color: var(--primary-white);
   cursor: pointer;
   transition: all 0.4s ease-out;
-  @include text-styling(var(--primary-white), var(--text-preset-3-size));
+  @include text-styling(var(--primary-white), var(--text-preset-4-size));
+  font-family: var(--primary-font);
 
   &:hover {
     background-color: var(--primary-white);

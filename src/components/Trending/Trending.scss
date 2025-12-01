@@ -6,16 +6,51 @@
     width: fit-content;
     gap: 2.5rem;
 
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
     .card {
       position: relative;
       width: 32rem;
       height: 16rem;
       border-radius: 8px;
 
-      button {
-        z-index: 100;
-        top: 0;
-        right: 0;
+      .bookmark__btn {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        background-color: var(--primary-grey-dark);
+        border: none;
+        border-radius: 50%;
+        padding: 0.8rem;
+        cursor: pointer;
+        color: var(--primary-white);
+        transition: 0.3s ease-in-out;
+        z-index: 1;
+
+        &:hover {
+          background-color: white;
+          color: var(--primary-black);
+        }
+
+        svg {
+          width: 20px;
+          height: 20px;
+        }
+      }
+
+      .overlay__btn {
+        width: 30%;
       }
     }
 
@@ -27,7 +62,7 @@
       border-radius: 8px;
     }
 
-    .trneding__card__context {
+    .trending__card__context {
       position: absolute;
       bottom: 15px;
       left: 20px;
