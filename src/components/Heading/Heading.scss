@@ -1,12 +1,20 @@
 @use "../../styles/mixins" as *;
 
 .heading {
-  margin-bottom: 2rem;
+  // margin-bottom: 2rem;
   &__text {
     @include text-styling(
       var(--primary-white),
       var(--text-preset-1-size),
       var(--font-weight-regular)
     );
+
+    @include for-mobile-up {
+      @include text-styling(
+        var(--primary-white),
+        var(--text-preset-1-size-mobile),
+        var(--font-weight-thin)
+      );
+    }
   }
 }

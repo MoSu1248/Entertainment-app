@@ -1,10 +1,16 @@
+@use "../../styles/mixins" as *;
+
 .trending {
+
   &__grid {
     margin-top: 1rem;
-    display: flex; // lay items in a row
-    scroll-behavior: smooth; // nice smooth scroll
-    width: fit-content;
-    gap: 2.5rem;
+    display: flex;
+    scroll-behavior: smooth;
+    gap: 1.5rem;
+
+    @include for-mobile-up {
+      gap: 1.5rem;
+    }
 
     &::-webkit-scrollbar {
       width: 6px;
@@ -21,9 +27,14 @@
 
     .card {
       position: relative;
-      width: 32rem;
-      height: 16rem;
+      width: 22rem;
+      height: 12rem;
       border-radius: 8px;
+
+      @include for-mobile-up {
+        width: 22rem;
+        height: 12rem;
+      }
 
       .bookmark__btn {
         position: absolute;
@@ -50,7 +61,7 @@
       }
 
       .overlay__btn {
-        width: 30%;
+        width: 50%;
       }
     }
 
@@ -76,7 +87,7 @@
     }
   }
 
-  //   &__grid::-webkit-scrollbar {
-  //   display: none;
-  // }
+  &__grid::-webkit-scrollbar {
+    display: none;
+  }
 }

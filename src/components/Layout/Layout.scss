@@ -1,8 +1,16 @@
+@use "../../styles/mixins" as *;
+
 .layout-wrapper {
   display: flex;
-  height: 100vh;
-  width: 100%;
+  // height: 100vh;
+  // width: 100%;
   overflow-x: hidden;
+  min-height: 100vh;
+  height: auto;
+
+  @include for-tablet-up {
+    flex-direction: column;
+  }
 
   &::-webkit-scrollbar {
     width: 6px;
@@ -21,5 +29,15 @@
     width: 90%;
     padding: 1.5rem 2rem;
     margin-left: 8%;
+
+    @include for-desktop-up {
+      margin-left: 0%;
+      width: 85%;
+    }
+
+    @include for-tablet-up {
+      margin-left: 0%;
+      width: 100%;
+    }
   }
 }

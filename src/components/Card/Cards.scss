@@ -8,6 +8,15 @@
   .card__img {
     position: relative;
     height: 14rem;
+
+    @include for-desktop-up {
+      height: 10rem;
+    }
+
+    @include for-tablet-up {
+      height: 10rem;
+    }
+
     img {
       width: 100%;
       border-radius: 8px;
@@ -18,13 +27,19 @@
       position: absolute;
       top: 15px;
       right: 20px;
-    background-color: var(--primary-grey-dark);
+      background-color: var(--primary-grey-dark);
       border: none;
       border-radius: 50%;
       padding: 0.8rem;
       cursor: pointer;
       color: var(--primary-white);
       transition: 0.3s ease-in-out;
+
+      @include for-tablet-up {
+        top: 10px;
+        right: 15px;
+        padding: 0.5rem;
+      }
 
       &:hover {
         background-color: white;
@@ -34,6 +49,11 @@
       svg {
         width: 20px;
         height: 20px;
+
+        @include for-tablet-up {
+          width: 15px;
+          height: 15px;
+        }
       }
     }
   }
@@ -64,7 +84,7 @@
     }
 
     &__text {
-      margin-left: 1.5rem; 
+      margin-left: 1.5rem;
       @include text-styling(
         var(
           --primary-white,
@@ -95,6 +115,14 @@
         var(--text-preset-5-size),
         var(--font-weight-regular)
       );
+
+      @include for-mobile-up {
+        @include text-styling(
+          var(--primary-grey),
+          var(--text-preset-5-size-mobile),
+          var(--font-weight-regular)
+        );
+      }
     }
 
     li:first-child {
@@ -115,5 +143,12 @@
       var(--text-preset-3-size),
       var(--font-weight-medium)
     );
+    @include for-mobile-up {
+      @include text-styling(
+        var(--primary-white),
+        var(--text-preset-3-size-mobile),
+        var(--font-weight-medium)
+      );
+    }
   }
 }

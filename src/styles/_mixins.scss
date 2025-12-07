@@ -1,3 +1,5 @@
+@use "./variables" as vars;
+
 /* Mixin Styling */
 
 @mixin text-styling(
@@ -28,5 +30,23 @@
   &:hover {
     background-color: var(--primary-white);
     color: var(--primary-black);
+  }
+}
+
+@mixin for-desktop-up {
+  @media (max-width: vars.$bp-desktop) {
+    @content;
+  }
+}
+
+@mixin for-tablet-up {
+  @media (max-width: vars.$bp-tablet) {
+    @content;
+  }
+}
+
+@mixin for-mobile-up {
+  @media (max-width: vars.$bp-mobile) {
+    @content;
   }
 }

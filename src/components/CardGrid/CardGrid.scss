@@ -1,0 +1,23 @@
+@use "../../styles/mixins" as *;
+.grid {
+  gap: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.card__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(auto, 1fr);
+  gap: 2rem;
+
+  @include for-tablet-up {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+  }
+
+  @include for-mobile-up {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
