@@ -1,15 +1,21 @@
 @use "../../styles/mixins" as *;
 
 .layout-wrapper {
-  display: flex;
+  display: grid;
   // height: 100vh;
   // width: 100%;
   overflow-x: hidden;
   min-height: 100vh;
   height: auto;
+  grid-template-columns: 10rem 1fr;
+  padding: 2rem 0;
 
   @include for-tablet-up {
-    flex-direction: column;
+    grid-template-columns: 1fr;
+  }
+
+  @include for-mobile-up {
+    padding: 0rem;
   }
 
   &::-webkit-scrollbar {
@@ -26,18 +32,10 @@
   }
 
   .content-wrapper {
-    width: 90%;
-    padding: 1.5rem 2rem;
-    margin-left: 8%;
-
-    @include for-desktop-up {
-      margin-left: 0%;
-      width: 85%;
-    }
+    width: calc(100vw - 10rem);
 
     @include for-tablet-up {
-      margin-left: 0%;
-      width: 100%;
+      width: calc(100vw);
     }
   }
 }

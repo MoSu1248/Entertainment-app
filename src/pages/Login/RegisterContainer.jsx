@@ -17,22 +17,18 @@ export default function Register({ register }) {
       return;
     }
 
-    // Get existing users
     const users = JSON.parse(localStorage.getItem("users") || "[]");
 
-    // Check if email already exists
     if (users.find((u) => u.email === email)) {
       alert("Email already registered");
       return;
     }
 
-    // Add new user to localStorage
     users.push({ email, password });
     localStorage.setItem("users", JSON.stringify(users));
 
-    // Auto-login the new user
     login({ email });
-    navigate("/"); // redirect to home
+    navigate("/"); 
   };
 
   return (

@@ -1,20 +1,26 @@
 @use "../../styles/mixins" as *;
 
+.nav_logout {
+  width: 2rem;
+  svg {
+    height: 2rem;
+    width: fit-content;
+  }
+}
+
 .navbar {
-  padding: 1.5rem 2rem;
-  position: fixed;
+  padding: 0rem 2rem;
   height: 80vh;
 
   @include for-desktop-up {
     position: relative;
     height: 80vh;
-    width: 15%;
   }
 
   @include for-tablet-up {
     position: relative;
     height: fit-content;
-    padding: 1rem;
+    padding: 1rem 2rem;
   }
 
   @include for-mobile-up {

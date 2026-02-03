@@ -4,6 +4,9 @@
   display: flex;
   gap: 1rem;
   align-items: center;
+  @include for-tablet-up {
+    padding:1rem 2rem;
+  }
 
   &__wrapper {
     position: relative;

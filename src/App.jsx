@@ -1,48 +1,42 @@
-import { Routes, Route, BrowserRouter, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import CardGrid from "./components/CardGrid/CardGrid";
-import Home from "./pages/Home/Home";
-import Layout from "./components/Layout/Layout";
-import Login from "./pages/Login/Login";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
 import { useLoginStore } from "./components/Store/LoginStore";
+import Layout from "./components/Layout/Layout";
+import Home from "./pages/Home/Home";
+import CardGrid from "./components/CardGrid/CardGrid";
+import Login from "./pages/Login/Login";
+import ProtectedRoute from "./components/Routes/ProtectedRoute";
+import AuthOnlyRoute from "./components/Routes/AuthRoute";
 
 function App() {
   const loadUser = useLoginStore((state) => state.loadUser);
 
+  // Load the user once, when the app starts
   useEffect(() => {
-    loadUser(); // populate user from localStorage
+    loadUser();
   }, []);
-
-  function RedirectIfLoggedIn() {
-    const user = useLoginStore((state) => state.user);
-    const loadUser = useLoginStore((state) => state.loadUser);
-    const navigate = useNavigate();
-
-    useEffect(() => {
-      loadUser(); // populate user from localStorage
-    }, []);
-
-    useEffect(() => {
-      if (user) {
-        navigate("/"); // redirect after user is loaded
-      }
-    }, [user]);
-
-    return null;
-  }
 
   return (
     <BrowserRouter>
-      {" "}
-      <RedirectIfLoggedIn />
       <Routes>
-        {/* Public pages */}
-        <Route path="/login" element={<Login />} />
-
-        {/* All pages inside your main layout */}
-        <Route path="/" element={<Layout />}>
+        <Route
+          path="/login"
+          element={
+            <AuthOnlyRoute>
+              <Login />
+            </AuthOnlyRoute>
+          }
+        />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <Layout />
+            </ProtectedRoute>
+          }
+        >
           <Route index element={<Home />} />
-          <Route path="/:type" element={<CardGrid />} />
+          <Route path=":type" element={<CardGrid />} />
         </Route>
       </Routes>
     </BrowserRouter>

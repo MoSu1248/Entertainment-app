@@ -1,12 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import Catagory from "../../assets/icon-category-movie.svg?react";
 import CatagoryTv from "../../assets/icon-category-tv.svg?react";
 import Bookmark from "../../assets/icon-bookmark-empty.svg?react";
 import BookmarkedActive from "../../assets/icon-bookmark-full.svg?react";
 import "./Trending.scss";
 import Play from "../../assets/icon-play.svg?react";
+import cardData from "../../data/data.json";
 
 export default function TrendingCard({ info }) {
+  const [cards, setCards] = useState(() => {
+    const saved = localStorage.getItem("cards");
+    if (saved) return JSON.parse(saved);
+    localStorage.setItem("cards", JSON.stringify(cardData));
+    return cardData;
+  });
+
+  const toggleBookmark = (title) => {
+    const updated = cards.map((card) => {
+      if (card.title === title) {
+        return { ...card, isBookmarked: !card.isBookmarked };
+      }
+      return card;
+    });
+
+    setCards(updated);
+    localStorage.setItem("cards", JSON.stringify(updated));
+  };
+
   return (
     <div className="card">
       <img
@@ -14,7 +34,10 @@ export default function TrendingCard({ info }) {
         alt=""
         className="card__background"
       />
-      <button className="bookmark__btn">
+      <button
+        className="bookmark__btn"
+        onClick={() => toggleBookmark(info.title)}
+      >
         {info.isBookmarked ? <BookmarkedActive /> : <Bookmark />}
       </button>
       <div className="overlay">

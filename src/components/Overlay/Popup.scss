@@ -1,0 +1,52 @@
+@use "../../styles/mixins" as *;
+
+.popup__wrapper {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: var(--primary-grey-dark);
+  z-index: 2;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup__container {
+  background-color: var(--primary-blue-950);
+  width: 400px;
+  height: 240px;
+  border-radius: 20px;
+  padding: 1.5rem 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+
+  h2 {
+    @include text-styling(var(--primary-white), var(--text-preset-1-size), 200);
+  }
+}
+
+.button__container {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+  button {
+    @include button-styling();
+    padding: 1rem;
+    width: 100%;
+  }
+
+  .cancel {
+    background-color: var(--primary-white);
+    color: var(--primary-blue-950);
+
+    &:hover {
+      color: var(--primary-white);
+
+      background-color: var(--primary-red-500);
+    }
+  }
+}

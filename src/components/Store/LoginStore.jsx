@@ -2,6 +2,7 @@ import { create } from "zustand";
 
 export const useLoginStore = create((set) => ({
   user: null,
+
   login: (userData) => {
     localStorage.setItem("user", JSON.stringify(userData));
     set({ user: userData });
@@ -15,7 +16,7 @@ export const useLoginStore = create((set) => ({
     if (storedUser) {
       set({ user: JSON.parse(storedUser) });
     } else {
-      set({ user: null }); // explicitly reset if nothing stored
+      set({ user: null });
     }
   },
 }));

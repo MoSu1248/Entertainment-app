@@ -9,6 +9,10 @@
       var(--font-weight-regular)
     );
 
+    @include for-tablet-up {
+      padding-left: 2rem;
+    }
+
     @include for-mobile-up {
       @include text-styling(
         var(--primary-white),

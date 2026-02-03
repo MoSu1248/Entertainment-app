@@ -3,6 +3,7 @@ import "./Navbar.scss";
 import Nav from "./Nav";
 import Logo from "../../assets/logo.svg?react";
 import avatar from "../../assets/image-avatar.png";
+import Logout from "../../assets/logout.svg?react";
 
 export default function Navbar() {
   return (
@@ -12,6 +13,9 @@ export default function Navbar() {
           <Logo />
         </div>
         <Nav />
+        {/* <button className="nav_logout">
+          <Logout />
+        </button> */}
         <div className="navbar__avatar">
           <img src={avatar} alt="" />
         </div>

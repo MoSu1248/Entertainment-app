@@ -2,7 +2,8 @@
 
 .card {
   // width: fit-content;
-  height: fit-content;
+  min-height: fit-content;
+
   color: var(--primary-white);
   cursor: pointer;
   .card__img {
@@ -10,7 +11,7 @@
     height: 14rem;
 
     @include for-desktop-up {
-      height: 10rem;
+      height: 12rem;
     }
 
     @include for-tablet-up {
