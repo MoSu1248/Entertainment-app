@@ -9,10 +9,10 @@ import { useSearchStore } from "../../components/Store/SearchStore";
 import "./Home.scss";
 
 export default function Home() {
-  const searchTerm = useSearchStore((state)=> state.searchTerm)
+  const searchTerm = useSearchStore((state) => state.searchTerm);
   return (
     <div className="wrapper">
-      <Search text={"Search for movies or TV series"} />
+      <Search />
       {!searchTerm && <Trending />}
       <CardGrid />
     </div>

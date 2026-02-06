@@ -11,7 +11,6 @@ import AuthOnlyRoute from "./components/Routes/AuthRoute";
 function App() {
   const loadUser = useLoginStore((state) => state.loadUser);
 
-  // Load the user once, when the app starts
   useEffect(() => {
     loadUser();
   }, []);

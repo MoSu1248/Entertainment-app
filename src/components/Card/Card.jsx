@@ -7,14 +7,16 @@ import Play from "../../assets/icon-play.svg?react";
 import "./Cards.scss";
 
 export default function Card({ info, toggleBookmark }) {
+  const imageUrl = `https://image.tmdb.org/t/p/w780${info.backdrop_path}`;
+
   return (
     <div className="card">
       <div className="card__img">
-        <img src={info.thumbnail.regular.medium} alt="" />{" "}
+        <img src={imageUrl} alt="" />{" "}
         <div className="overlay">
           <button className="overlay__btn">
             <Play />
-            <p className="overlay__text">Play</p>
+            <p className="overlay__text">View</p>
           </button>
         </div>
         <button
@@ -26,14 +28,14 @@ export default function Card({ info, toggleBookmark }) {
       </div>
       <div className="card__context">
         <ul className="card__context-list">
-          <li>{info.year}</li>
+          <li>{info.release_date}</li>
           <li className="list__item-catagory">
-            {info.category === "Movie" ? <Catagory /> : <CatagoryTv />}
-            <span>{info.category}</span>
+            {info.media_type === "movie" ? <Catagory /> : <CatagoryTv />}
+            <span>{info.media_type}</span>
           </li>
-          <li>{info.rating}</li>
+          <li>{info.vote_average + "/10"}</li>
         </ul>
-        <h3 className="card__context-title">{info.title}</h3>
+        <h3 className="card__context-title">{info.title || info.name}</h3>
       </div>
     </div>
   );

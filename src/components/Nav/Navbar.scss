@@ -36,11 +36,12 @@
   &__container {
     background-color: var(--primary-blue-900);
     padding: 1.5rem;
-    height: 85%;
+    height: 80%;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
     gap: 3rem;
+    position: fixed;
 
     @include for-tablet-up {
       flex-direction: row;

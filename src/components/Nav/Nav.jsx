@@ -9,12 +9,12 @@ import Logout from "../../assets/logout.svg?react";
 import { useOverlayStore } from "../Store/useOverlayStore";
 
 export default function Nav() {
-  const logout = useOverlayStore((state) => state.showLogout)
+  const logout = useOverlayStore((state) => state.showLogout);
   const navLinks = [
     { type: "link", url: "/", icon: <NavHome /> },
-    { type: "link", url: "/TV Series", icon: <NavSeries /> },
-    { type: "link", url: "/Movie", icon: <NavMovies /> },
-    { type: "link", url: "/Bookmarked", icon: <NavBookmark /> },
+    { type: "link", url: "/tv", icon: <NavSeries /> },
+    { type: "link", url: "/movie", icon: <NavMovies /> },
+    { type: "link", url: "/bookmarked", icon: <NavBookmark /> },
     { type: "btn", action: logout, icon: <Logout /> },
   ];
 
