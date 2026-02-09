@@ -1,23 +1,31 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useLoginStore } from "./components/Store/LoginStore";
+
 import Layout from "./components/Layout/Layout";
 import Home from "./pages/Home/Home";
 import CardGrid from "./components/CardGrid/CardGrid";
 import Login from "./pages/Login/Login";
+import MovieModal from "./components/MovieModal/MovieModal";
+
 import ProtectedRoute from "./components/Routes/ProtectedRoute";
 import AuthOnlyRoute from "./components/Routes/AuthRoute";
 
 function App() {
   const loadUser = useLoginStore((state) => state.loadUser);
+  const location = useLocation();
+
+  // If we navigated from a page, it'll be stored here
+  const backgroundLocation = location.state?.background;
 
   useEffect(() => {
     loadUser();
   }, []);
 
   return (
-    <BrowserRouter>
-      <Routes>
+    <>
+      {/* Main routes (background) */}
+      <Routes location={backgroundLocation || location}>
         <Route
           path="/login"
           element={
@@ -26,6 +34,7 @@ function App() {
             </AuthOnlyRoute>
           }
         />
+
         <Route
           path="/"
           element={
@@ -38,7 +47,14 @@ function App() {
           <Route path=":type" element={<CardGrid />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+
+      {/* Modal routes */}
+      {backgroundLocation && (
+        <Routes>
+          <Route path="/:type/:id" element={<MovieModal />} />
+        </Routes>
+      )}
+    </>
   );
 }
 

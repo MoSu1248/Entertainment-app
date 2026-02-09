@@ -4,16 +4,25 @@ import CatagoryTv from "../../assets/icon-category-tv.svg?react";
 import Bookmark from "../../assets/icon-bookmark-empty.svg?react";
 import BookmarkedActive from "../../assets/icon-bookmark-full.svg?react";
 import Play from "../../assets/icon-play.svg?react";
+import { useMovieModalStore } from "../Store/MovieModalStore";
 import "./Cards.scss";
+import { useLocation, useNavigate } from "react-router";
 
 export default function Card({ info, toggleBookmark }) {
   const imageUrl = `https://image.tmdb.org/t/p/w780${info.backdrop_path}`;
+  const navigate = useNavigate();
+
+  const location = useLocation();
+
+  function handleClick(movieId) {
+    navigate(`/${info.media_type}/${movieId}`, { state: { background: location } });
+  }
 
   return (
     <div className="card">
       <div className="card__img">
         <img src={imageUrl} alt="" />{" "}
-        <div className="overlay">
+        <div className="overlay" onClick={() => handleClick(info.id)}>
           <button className="overlay__btn">
             <Play />
             <p className="overlay__text">View</p>

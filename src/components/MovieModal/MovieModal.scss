@@ -1,0 +1,25 @@
+.modal__wrapper {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(3, 3, 3, 0.671);
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: scroll;
+
+  .modal__container {
+    background-color: var(--primary-blue-950);
+    height: fit-content;
+    border-radius: 8px;
+    width: 50%;
+    color: var(--primary-white);
+    img {
+      border-top-right-radius: 8px;
+      border-top-left-radius: 8px;
+      width: 100%;
+    }
+  }
+}
