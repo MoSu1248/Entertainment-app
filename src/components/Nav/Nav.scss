@@ -15,6 +15,11 @@
     @include for-tablet-up {
       flex-direction: row;
       gap: 4rem;
+
+      @include for-mobile-up {
+        flex-direction: row;
+        gap: 1rem;
+      }
     }
   }
 
@@ -23,6 +28,8 @@
     transition: all 0.3s ease;
     cursor: pointer;
     padding: 0.5rem;
+
+
 
     &:hover {
       color: var(--primary-red-500);

@@ -54,7 +54,10 @@
     }
 
     @include for-mobile-up {
+      padding: 1rem 1rem;
+      justify-content: space-between;
       border-radius: 0px;
+      gap: 0;
     }
   }
 

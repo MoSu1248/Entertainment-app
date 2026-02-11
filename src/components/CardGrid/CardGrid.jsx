@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./CardGrid.scss";
 import cardData from "../../data/data.json";
 import Card from "../Card/Card";
-import { useParams } from "react-router-dom";
+import { data, useParams } from "react-router-dom";
 import { useSearchStore } from "../Store/SearchStore";
 import Heading from "../Heading/Heading";
 import Search from "../Search/Search";
@@ -52,6 +52,9 @@ export default function CardGrid() {
     "TV Series": "TV Series",
     Movie: "Movies",
   };
+
+  console.log(cards);
+  
 
   return (
     <div className="grid">
