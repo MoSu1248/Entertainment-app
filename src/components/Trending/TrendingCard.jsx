@@ -4,8 +4,8 @@ import CatagoryTv from "../../assets/icon-category-tv.svg?react";
 import Bookmark from "../../assets/icon-bookmark-empty.svg?react";
 import BookmarkedActive from "../../assets/icon-bookmark-full.svg?react";
 import "./Trending.scss";
-import Play from "../../assets/icon-play.svg?react";
 import cardData from "../../data/data.json";
+import { easeIn, easeInOut, easeOut, motion } from "motion/react";
 
 export default function TrendingCard({ info }) {
   const [cards, setCards] = useState(() => {
@@ -14,6 +14,7 @@ export default function TrendingCard({ info }) {
     localStorage.setItem("cards", JSON.stringify(cardData));
     return cardData;
   });
+  const imageUrl = `https://image.tmdb.org/t/p/w780${info.backdrop_path}`;
 
   const toggleBookmark = (title) => {
     const updated = cards.map((card) => {
@@ -28,24 +29,23 @@ export default function TrendingCard({ info }) {
   };
 
   return (
-    <div className="card">
-      <img
-        src={info.thumbnail.trending.large}
-        alt=""
-        className="card__background"
-      />
+    <div
+      className="card"
+      onClick={() => handleClick(info.id)}
+      whileHover={{
+        scale: 1.2,
+        transition: { duration: 0.2, ease: easeInOut, delay: 0.1 },
+        zIndex: 4,
+        y: -10,
+      }}
+    >
+      <img src={imageUrl} alt="" className="card__background" />
       <button
         className="bookmark__btn"
         onClick={() => toggleBookmark(info.title)}
       >
         {info.isBookmarked ? <BookmarkedActive /> : <Bookmark />}
       </button>
-      <div className="overlay">
-        <button className="overlay__btn">
-          <Play />
-          <p className="overlay__text">Play</p>
-        </button>
-      </div>
       <div className="trending__card__context">
         <ul className="card__context-list">
           <li>{info.year}</li>

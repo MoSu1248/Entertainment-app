@@ -10,6 +10,7 @@ import MovieModal from "./components/MovieModal/MovieModal";
 
 import ProtectedRoute from "./components/Routes/ProtectedRoute";
 import AuthOnlyRoute from "./components/Routes/AuthRoute";
+import { AnimatePresence, LayoutGroup } from "motion/react";
 
 function App() {
   const loadUser = useLoginStore((state) => state.loadUser);
@@ -23,7 +24,7 @@ function App() {
   }, []);
 
   return (
-    <>
+    <LayoutGroup>
       {/* Main routes (background) */}
       <Routes location={backgroundLocation || location}>
         <Route
@@ -47,14 +48,15 @@ function App() {
           <Route path=":type" element={<CardGrid />} />
         </Route>
       </Routes>
-
       {/* Modal routes */}
-      {backgroundLocation && (
-        <Routes>
-          <Route path="/:type/:id" element={<MovieModal />} />
-        </Routes>
-      )}
-    </>
+      <AnimatePresence>
+        {backgroundLocation && (
+          <Routes>
+            <Route path="/:type/:id" element={<MovieModal />} />
+          </Routes>
+        )}
+      </AnimatePresence>
+    </LayoutGroup>
   );
 }
 

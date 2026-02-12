@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "./MovieModal.scss";
 import { Link, useParams } from "react-router";
+import { motion } from "motion/react";
+import { useNavigate } from "react-router-dom";
+import CloseIcon from "../../assets/icon-close.svg?react";
 
 export default function MovieModal() {
   const { id, type } = useParams();
   const [info, setInfo] = useState([]);
   const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
+  const navigate = useNavigate();
   const element = document.querySelector("body");
 
   useEffect(() => {
@@ -16,7 +20,6 @@ export default function MovieModal() {
         );
         const data = await res.json();
         setInfo(data);
-        element.style.overflowY = "hidden";
       } catch (err) {
         console.error("Failed to fetch movie info:", err);
         console.log(err);
@@ -28,16 +31,41 @@ export default function MovieModal() {
     fetchMovie();
   }, [id]);
 
+  function handleClose() {
+    element.style.overflowY = "visible";
+    navigate(-1);
+  }
+
   console.log(info);
 
   return (
-    <div className="modal__wrapper">
-      <div className="modal__container">
+    <motion.div
+      className="modal__wrapper"
+      // initial={{ opacity: 0 }}
+      // animate={{ opacity: 1 }}
+      // transition={{ duration: 0.5 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      style={{
+        zIndex: 1000, // above all cards
+      }}
+    >
+      <motion.div
+        className="modal__container"
+        transition={{ duration: 0.3 }}
+        layoutId={String(id)}
+        // initial={{ opacity: 0, scale: 0.95 }}
+        // animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.95 }}
+      >
+        <button onClick={() => handleClose()} className="close__btn">
+          <CloseIcon />
+        </button>
         {info && (
           <div key={info.id}>
             <img
+              layoutId={`image-${info.id}`}
               src={`https://image.tmdb.org/t/p/w780${info.backdrop_path}`}
-              alt=""
+              alt={info.title}
             />
             <h1>{info.title}</h1>
             <p>{info.overview}</p>
@@ -49,7 +77,7 @@ export default function MovieModal() {
             </ul>
           </div>
         )}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
