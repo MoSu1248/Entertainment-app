@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Heading from "../Heading/Heading";
-import cardData from "../../data/data.json";
 import TrendingCard from "./TrendingCard";
 import Card from "../Card/Card";
 import "./Trending.scss";
 
 export default function Trending() {
   const [cards, setCards] = useState([]);
+  const [cards2, setCards2] = useState([]);
+  const [cards3, setCards3] = useState([]);
+  const [cards4, setCards4] = useState([]);
+
   const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
   useEffect(() => {

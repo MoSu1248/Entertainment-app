@@ -26,7 +26,7 @@
     background-color: var(--primary-blue-950);
     height: fit-content;
     border-radius: 8px;
-    width: 50%;
+    width: 40%;
     color: var(--primary-white);
     min-height: 80%;
     position: relative;
@@ -72,6 +72,8 @@
       border-top-left-radius: 8px;
       width: 100%;
       position: relative;
+      min-height: 50vh;
+      max-height: 60vh;
 
       &::after {
         content: "";

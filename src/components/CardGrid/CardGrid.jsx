@@ -7,7 +7,7 @@ import { useSearchStore } from "../Store/SearchStore";
 import Heading from "../Heading/Heading";
 import Search from "../Search/Search";
 
-export default function CardGrid() {
+export default function CardGrid({ results, handleSearch }) {
   const { type } = useParams();
   const searchTerm = useSearchStore((state) => state.searchTerm);
   const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
@@ -20,7 +20,7 @@ export default function CardGrid() {
     const fetchMovies = async () => {
       try {
         const res = await fetch(
-          `https://api.themoviedb.org/3/trending/${mediaType}/week?api_key=${TMDB_API_KEY}`,
+          `https://api.themoviedb.org/3/trending/${mediaType}/week?api_key=${TMDB_API_KEY}&page=1`,
         );
         const data = await res.json();
         setCards(data.results);
@@ -49,32 +49,44 @@ export default function CardGrid() {
 
   const headings = {
     Bookmarked: "Bookmarked",
-    "TV Series": "TV Series",
-    Movie: "Movies",
+    tv: "Tv series",
+    movie: "Movies",
   };
-
-  console.log(cards);
-  
 
   return (
     <div className="grid">
-      {type && <Search text={`Search ${headings[type]}`} />}
-      <Heading text={headings[type] || "Recommended for you"} />
+      {/* {type && (
+        <Search
+          text={`Search ${headings[type]}`}
+          handleSearch={() => handleSearch()}
+        />
+      )} */}
+      <div className="row">
+        <Heading text={headings[type] || `Results for ${searchTerm}`} />
+      </div>
       <div className="card__grid">
-        {cards
-          ?.filter((item) => {
-            if (!type) return true;
-            // if (type === "Bookmarked") {
-            //   return item.isBookmarked === true;
-            // }
-            return item.media_type === type;
-          })
-          // .filter((item) => {
-          //   return item.title.toLowerCase().includes(searchTerm.toLowerCase());
-          // })
-          .map((item, index) => (
-            <Card key={index} info={item} toggleBookmark={toggleBookmark} />
-          ))}
+        {searchTerm
+          ? results.map((item, index) => (
+              <Card
+                key={index}
+                info={item}
+                toggleBookmark={toggleBookmark}
+                media={item.media_type}
+              />
+            ))
+          : cards
+              ?.filter((item) => {
+                if (!type) return true;
+                return item.media_type === type;
+              })
+              ?.map((item, index) => (
+                <Card
+                  key={index}
+                  info={item}
+                  toggleBookmark={toggleBookmark}
+                  media={type}
+                />
+              ))}
       </div>
     </div>
   );

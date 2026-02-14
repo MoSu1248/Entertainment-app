@@ -4,6 +4,7 @@ import Navbar from "../Nav/Navbar";
 import { useOverlayStore } from "../Store/useOverlayStore";
 import Popup from "../Overlay/Popup";
 import "./Layout.scss";
+import Search from "../Search/Search";
 
 export default function Layout() {
   const { overlayState } = useOverlayStore();
@@ -13,7 +14,10 @@ export default function Layout() {
       {overlayState && <Popup />}
       <Navbar />
       <main className="content-wrapper">
-        <Outlet />
+        <>
+          <Search />
+          <Outlet />
+        </>
       </main>
     </div>
   );

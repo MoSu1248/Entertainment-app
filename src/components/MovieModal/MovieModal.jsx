@@ -36,7 +36,8 @@ export default function MovieModal() {
     navigate(-1);
   }
 
-  console.log(info);
+  const imageUrlBack = `https://image.tmdb.org/t/p/original${info.backdrop_path} `;
+  const imageUrlPoster = `https://image.tmdb.org/t/p/w780${info.poster_path}`;
 
   return (
     <motion.div
@@ -44,7 +45,7 @@ export default function MovieModal() {
       // initial={{ opacity: 0 }}
       // animate={{ opacity: 1 }}
       // transition={{ duration: 0.5 }}
-      exit={{ opacity: 0, scale: 0.95 }}
+      // exit={{ opacity: 0, scale: 0.95 }}
       style={{
         zIndex: 1000, // above all cards
       }}
@@ -62,11 +63,21 @@ export default function MovieModal() {
         </button>
         {info && (
           <div key={info.id}>
-            <img
-              layoutId={`image-${info.id}`}
-              src={`https://image.tmdb.org/t/p/w780${info.backdrop_path}`}
-              alt={info.title}
-            />
+            {info.backdrop_path ? (
+              <img
+                className="image_top"
+                layoutId={`image-${info.id}`}
+                src={imageUrlBack}
+                alt={info.title}
+              />
+            ) : (
+              <img
+                className="image_top"
+                layoutId={`image-${info.id}`}
+                src={imageUrlPoster}
+                alt={info.title}
+              />
+            )}
             <h1>{info.title}</h1>
             <p>{info.overview}</p>
             <p>{info.release_date}</p>

@@ -1,20 +1,34 @@
-import React from "react";
-import Search from "../../components/Search/Search";
-import Card from "../../components/Card/Card";
-import Heading from "../../components/Heading/Heading";
+import React, { useState, useEffect } from "react";
 import CardGrid from "../../components/CardGrid/CardGrid";
-import Trending from "../../components/Trending/Trending";
 import { useSearchStore } from "../../components/Store/SearchStore";
-
+import Row from "../../components/Row/Row";
 import "./Home.scss";
 
 export default function Home() {
   const searchTerm = useSearchStore((state) => state.searchTerm);
+  const setSearchTerm = useSearchStore((state) => state.setSearchTerm);
+  const results = useSearchStore((state) => state.results);
+  const setResults = useSearchStore((state) => state.setResults);
+
+
+  const rows = [
+    { title: "Trending", endpoint: "trending/movie/week", media: "movie" },
+    { title: "Upcoming", endpoint: "movie/upcoming", media: "movie" },
+    { title: "Top Rated", endpoint: "movie/top_rated", media: "movie" },
+    { title: "Popular Tv Series", endpoint: "tv/on_the_air", media: "tv" },
+    { title: "Top Rated TV Series", endpoint: "tv/top_rated", media: "tv" },
+  ];
+
   return (
     <div className="wrapper">
-      <Search />
-      {!searchTerm && <Trending />}
-      <CardGrid />
+      {searchTerm && (
+        <CardGrid
+          results={results}
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+        />
+      )}
+      {rows.map((row) => !searchTerm && <Row key={row.title} {...row} />)}
     </div>
   );
 }

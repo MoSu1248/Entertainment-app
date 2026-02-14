@@ -3,11 +3,15 @@
 .trending {
   &__grid {
     display: flex;
-    gap: 1.5rem;
+    gap: 0.5rem;
     overflow-x: auto;
-    overflow-y: hidden;
+    overflow-y: visible;
     scroll-behavior: smooth;
-    padding: 1rem 3rem 2rem 0;
+    padding: 2rem 4rem 2rem 2rem;
+    z-index: 1000;
+
+    .trending__scroll {
+    }
 
     @include for-tablet-up {
       padding: 1rem 3rem 2rem 2rem;
@@ -32,14 +36,21 @@
 
     .card {
       flex-shrink: 0; // prevents shrinking
-      width: 28rem;
-      height: 15rem;
+      width: 20rem;
+      height: 12rem;
       border-radius: 8px;
       position: relative;
 
+      @include for-desktop-up {
+        height: 10rem;
+      }
+
       @include for-mobile-up {
-        width: 22rem;
-        height: 12rem;
+        height: 10rem;
+      }
+
+      @media (max-width: 400px) {
+        height: 8rem;
       }
 
       .bookmark__btn {

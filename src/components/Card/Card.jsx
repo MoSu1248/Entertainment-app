@@ -3,36 +3,41 @@ import Catagory from "../../assets/icon-category-movie.svg?react";
 import CatagoryTv from "../../assets/icon-category-tv.svg?react";
 import Bookmark from "../../assets/icon-bookmark-empty.svg?react";
 import BookmarkedActive from "../../assets/icon-bookmark-full.svg?react";
-import Play from "../../assets/icon-play.svg?react";
-import { useMovieModalStore } from "../Store/MovieModalStore";
 import "./Cards.scss";
 import { useLocation, useNavigate } from "react-router";
-import { easeIn, easeInOut, easeOut, motion } from "motion/react";
-import { animate } from "motion";
+import { easeInOut, motion } from "motion/react";
+import { useSearchStore } from "../Store/SearchStore";
 
-export default function Card({ info, toggleBookmark }) {
-  const imageUrl = `https://image.tmdb.org/t/p/w780${info.backdrop_path}`;
+export default function Card({ info, toggleBookmark, media }) {
+  const imageUrl = `https://image.tmdb.org/t/p/w780${info.backdrop_path} `;
+  const imageUrl2 = `https://image.tmdb.org/t/p/original${info.poster_path}`;
   const navigate = useNavigate();
   const [CardHover, setCardHover] = useState(false);
   const location = useLocation();
   const element = document.querySelector("body");
+  const searchTerm = useSearchStore((state) => state.searchTerm);
 
   function handleClick(movieId) {
     element.style.overflowY = "hidden";
-
-    navigate(`/${info.media_type}/${movieId}`, {
-      state: { background: location },
-    });
+    {
+      !searchTerm
+        ? navigate(`/${media}/${movieId}`, {
+            state: { background: location },
+          })
+        : navigate(`/${info.media_type}/${movieId}`, {
+            state: { background: location },
+          });
+    }
   }
 
   return (
-    <motion.div layoutId={String(info.id)} layout>
+    <motion.div layoutId={String(info.id)}>
       <motion.div
-        className="card"
+        className={!searchTerm ? `card` : "card poster"}
         onClick={() => handleClick(info.id)}
         whileHover={{
           scale: 1.2,
-          transition: { duration: 0.2, ease: easeInOut, delay: 0.1 },
+          transition: { duration: 0.3, ease: easeInOut, delay: 0.1 },
           zIndex: 4,
           y: -10,
         }}
@@ -40,7 +45,15 @@ export default function Card({ info, toggleBookmark }) {
         onHoverEnd={() => setCardHover(false)}
       >
         <div className="card__img">
-          <img src={imageUrl} alt={info.title} layoutId={`image-${info.id}`} />
+          {info.poster_path || info.backdrop_path ? (
+            <img
+              src={!searchTerm ? imageUrl : imageUrl2}
+              alt={info.title}
+              layoutId={`image-${info.id}`}
+            />
+          ) : (
+            <div className="card__img-placeholder">No Image</div>
+          )}
           {CardHover && (
             <button
               className="card__bookmark-btn"
@@ -55,7 +68,7 @@ export default function Card({ info, toggleBookmark }) {
             initial={{ opacity: 0 }}
             animate={{
               opacity: 1,
-              transition: { duration: 0.6, easeInOut },
+              transition: { duration: 0.3, easeInOut },
             }}
             className="card__context"
           >
@@ -65,7 +78,11 @@ export default function Card({ info, toggleBookmark }) {
                 {info.media_type === "movie" ? <Catagory /> : <CatagoryTv />}
                 <span>{info.media_type}</span>
               </li>
-              <li>IMDB : {info.vote_average + "/10"}</li>
+              {info.vote_average ? (
+                <li>IMDB : {info.vote_average + "/10"}</li>
+              ) : (
+                <li>Coming Soon</li>
+              )}
             </ul>
             <h3 className="card__context-title">{info.title || info.name}</h3>
           </motion.div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Nav.scss";
 import { NavLink } from "react-router";
 import NavHome from "../../assets/icon-nav-home.svg?react";
@@ -7,9 +7,13 @@ import NavMovies from "../../assets/icon-nav-movies.svg?react";
 import NavSeries from "../../assets/icon-nav-tv-series.svg?react";
 import Logout from "../../assets/logout.svg?react";
 import { useOverlayStore } from "../Store/useOverlayStore";
+import { useSearchStore } from "../Store/SearchStore";
 
 export default function Nav() {
   const logout = useOverlayStore((state) => state.showLogout);
+  const setSearchTerm = useSearchStore((state) => state.setSearchTerm);
+  const setResults = useSearchStore((state) => state.setResults);
+
   const navLinks = [
     { type: "link", url: "/", icon: <NavHome /> },
     { type: "link", url: "/tv", icon: <NavSeries /> },
@@ -17,6 +21,10 @@ export default function Nav() {
     { type: "link", url: "/bookmarked", icon: <NavBookmark /> },
     // { type: "btn", action: logout, icon: <Logout /> },
   ];
+
+  function onClick() {
+    (setResults(null), setSearchTerm(null));
+  }
 
   return (
     <div className="nav">
@@ -27,7 +35,7 @@ export default function Nav() {
               <NavLink
                 to={link.url}
                 className={`nav__link`}
-                onClick={link.action}
+                onClick={() => onClick()}
               >
                 {link.icon}
               </NavLink>

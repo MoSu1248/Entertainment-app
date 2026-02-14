@@ -7,6 +7,7 @@ import Home from "./pages/Home/Home";
 import CardGrid from "./components/CardGrid/CardGrid";
 import Login from "./pages/Login/Login";
 import MovieModal from "./components/MovieModal/MovieModal";
+import { useSearchStore } from "./components/Store/SearchStore";
 
 import ProtectedRoute from "./components/Routes/ProtectedRoute";
 import AuthOnlyRoute from "./components/Routes/AuthRoute";
@@ -15,9 +16,11 @@ import { AnimatePresence, LayoutGroup } from "motion/react";
 function App() {
   const loadUser = useLoginStore((state) => state.loadUser);
   const location = useLocation();
+  const searchTerm = useSearchStore((state) => state.searchTerm);
 
   // If we navigated from a page, it'll be stored here
   const backgroundLocation = location.state?.background;
+  const cards = location.state?.cards;
 
   useEffect(() => {
     loadUser();
@@ -46,6 +49,7 @@ function App() {
         >
           <Route index element={<Home />} />
           <Route path=":type" element={<CardGrid />} />
+          <Route path="/search" element={<Home />} />
         </Route>
       </Routes>
       {/* Modal routes */}
@@ -53,6 +57,14 @@ function App() {
         {backgroundLocation && (
           <Routes>
             <Route path="/:type/:id" element={<MovieModal />} />
+          </Routes>
+        )}
+      </AnimatePresence>
+      {/* Modal routes */}
+      <AnimatePresence>
+        {cards && (
+          <Routes>
+            <Route path="/:type/all" element={<MovieModal />} />
           </Routes>
         )}
       </AnimatePresence>

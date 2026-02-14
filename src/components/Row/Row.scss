@@ -1,0 +1,13 @@
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  margin-top: 2rem;
+  margin-left: 2rem;
+  width: 100%;
+  
+
+  .row__btn{
+    display: none;
+  }
+}
