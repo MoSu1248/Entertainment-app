@@ -12,13 +12,13 @@ import { useSearchStore } from "./components/Store/SearchStore";
 import ProtectedRoute from "./components/Routes/ProtectedRoute";
 import AuthOnlyRoute from "./components/Routes/AuthRoute";
 import { AnimatePresence, LayoutGroup } from "motion/react";
+import AllMoviesModal from "./components/AllMoviesModal/AllMoviesModal";
 
 function App() {
   const loadUser = useLoginStore((state) => state.loadUser);
   const location = useLocation();
   const searchTerm = useSearchStore((state) => state.searchTerm);
 
-  // If we navigated from a page, it'll be stored here
   const backgroundLocation = location.state?.background;
   const cards = location.state?.cards;
 
@@ -64,7 +64,7 @@ function App() {
       <AnimatePresence>
         {cards && (
           <Routes>
-            <Route path="/:type/all" element={<MovieModal />} />
+            <Route path="/:type/:media/:time/all" element={<AllMoviesModal />} />
           </Routes>
         )}
       </AnimatePresence>

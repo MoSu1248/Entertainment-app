@@ -62,10 +62,35 @@ export default function CardGrid({ results, handleSearch }) {
         />
       )} */}
       <div className="row">
-        <Heading text={headings[type] || `Results for ${searchTerm}`} />
+        {searchTerm && (
+          <Heading text={headings[type] || `Results for ${searchTerm}`} />
+        )}
       </div>
       <div className="card__grid">
         {searchTerm
+          ? results.map((item, index) => (
+              <Card
+                key={index}
+                info={item}
+                toggleBookmark={toggleBookmark}
+                media={item.media_type}
+              />
+            ))
+          : cards
+              ?.filter((item) => {
+                if (!type) return true;
+                return item.media_type === type;
+              })
+              ?.map((item, index) => (
+                <Card
+                  key={index}
+                  info={item}
+                  toggleBookmark={toggleBookmark}
+                  media={type}
+                />
+              ))}
+
+        {!searchTerm
           ? results.map((item, index) => (
               <Card
                 key={index}

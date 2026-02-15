@@ -1,7 +1,6 @@
 @use "../../styles/mixins" as *;
 
 .heading {
-
   width: fit-content;
   &__text {
     @include text-styling(

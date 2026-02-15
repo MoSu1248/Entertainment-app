@@ -6,7 +6,7 @@
   overflow-x: hidden;
   min-height: 100vh;
   height: auto;
-  grid-template-columns: 10rem 1fr;
+  grid-template-columns: 8rem 1fr;
   padding: 2rem 0;
 
   @include for-tablet-up {
@@ -31,7 +31,7 @@
   }
 
   .content-wrapper {
-    width: calc(100vw - 10rem);
+    width: calc(100vw - 8rem);
 
     @include for-tablet-up {
       width: calc(100vw);

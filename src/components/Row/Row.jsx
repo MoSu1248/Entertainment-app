@@ -33,8 +33,10 @@ export default function Row({ endpoint, title, media }) {
 
   function handleClick() {
     element.style.overflowY = "hidden";
-    navigate(`/${title}/all`, {
-      state: { background: location, cards: cards },
+    console.log(endpoint);
+    
+    navigate(`/${endpoint}/all`, {
+      state: { cards: media },
     });
   }
 

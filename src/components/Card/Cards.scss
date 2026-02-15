@@ -1,5 +1,8 @@
 @use "../../styles/mixins" as *;
 
+.card__hover{
+  
+}
 .card {
   // width: fit-content;
   min-height: fit-content;
@@ -73,6 +76,7 @@
       cursor: pointer;
       color: var(--primary-white);
       transition: 0.3s ease-in-out;
+      z-index: 100;
 
       @include for-tablet-up {
         top: 10px;
@@ -108,9 +112,14 @@
   right: 0;
   bottom: 0;
   pointer-events: none; // optional, feels more Netflix
-  padding: 0.8rem;
-  background: linear-gradient(to top, rgb(0, 0, 0), rgba(0, 0, 0, 0));
   border-radius: 4px;
+  height: 100%;
+
+  & iframe {
+    pointer-events: none;
+    border-radius: 4px;
+  }
+
   &-list {
     display: flex;
     gap: 2rem;
