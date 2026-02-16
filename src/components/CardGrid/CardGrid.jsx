@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
 import "./CardGrid.scss";
-import cardData from "../../data/data.json";
 import Card from "../Card/Card";
-import { data, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useSearchStore } from "../Store/SearchStore";
 import Heading from "../Heading/Heading";
-import Search from "../Search/Search";
+import ViewAll from "../ViewAll/ViewAll";
+import Filter from "../Filter/Filter";
 
-export default function CardGrid({ results, handleSearch }) {
+export default function CardGrid({ results }) {
   const { type } = useParams();
   const searchTerm = useSearchStore((state) => state.searchTerm);
   const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
+  const [loading, setLoading] = useState(true);
+  const [number, setNumber] = useState(1);
+  const [filter, setFilter] = useState();
 
   const [cards, setCards] = useState([]);
 
@@ -20,20 +23,22 @@ export default function CardGrid({ results, handleSearch }) {
     const fetchMovies = async () => {
       try {
         const res = await fetch(
-          `https://api.themoviedb.org/3/trending/${mediaType}/week?api_key=${TMDB_API_KEY}&page=1`,
+          `https://api.themoviedb.org/3/trending/${mediaType}/week?api_key=${TMDB_API_KEY}&page=${number}&with_genres=27`,
         );
         const data = await res.json();
-        setCards(data.results);
+        setCards((prev) =>
+          number === 1 ? data.results : [...prev, ...data.results],
+        );
       } catch (err) {
         console.error("Failed to fetch movies:", err);
         console.log(err);
       } finally {
-        console.log("loading...");
+        setLoading(false);
       }
     };
 
     fetchMovies();
-  }, [mediaType]);
+  }, [mediaType, number]);
 
   const toggleBookmark = (title) => {
     const updated = cards.map((card) => {
@@ -55,25 +60,23 @@ export default function CardGrid({ results, handleSearch }) {
 
   return (
     <div className="grid">
-      {/* {type && (
-        <Search
-          text={`Search ${headings[type]}`}
-          handleSearch={() => handleSearch()}
-        />
-      )} */}
       <div className="row">
-        {searchTerm && (
-          <Heading text={headings[type] || `Results for ${searchTerm}`} />
+        {type && (
+          <div>
+            <Heading text={headings[type] || `Results for ${searchTerm}`} />
+            <Filter setFilter={setFilter} filter={filter} />
+          </div>
         )}
       </div>
       <div className="card__grid">
         {searchTerm
-          ? results.map((item, index) => (
+          ? results?.map((item, index) => (
               <Card
                 key={index}
                 info={item}
                 toggleBookmark={toggleBookmark}
                 media={item.media_type}
+                loading={loading}
               />
             ))
           : cards
@@ -87,32 +90,11 @@ export default function CardGrid({ results, handleSearch }) {
                   info={item}
                   toggleBookmark={toggleBookmark}
                   media={type}
-                />
-              ))}
-
-        {!searchTerm
-          ? results.map((item, index) => (
-              <Card
-                key={index}
-                info={item}
-                toggleBookmark={toggleBookmark}
-                media={item.media_type}
-              />
-            ))
-          : cards
-              ?.filter((item) => {
-                if (!type) return true;
-                return item.media_type === type;
-              })
-              ?.map((item, index) => (
-                <Card
-                  key={index}
-                  info={item}
-                  toggleBookmark={toggleBookmark}
-                  media={type}
+                  loading={loading}
                 />
               ))}
       </div>
+      <ViewAll setNumber={setNumber} />
     </div>
   );
 }

@@ -17,7 +17,6 @@ import AllMoviesModal from "./components/AllMoviesModal/AllMoviesModal";
 function App() {
   const loadUser = useLoginStore((state) => state.loadUser);
   const location = useLocation();
-  const searchTerm = useSearchStore((state) => state.searchTerm);
 
   const backgroundLocation = location.state?.background;
   const cards = location.state?.cards;
@@ -60,14 +59,11 @@ function App() {
           </Routes>
         )}
       </AnimatePresence>
-      {/* Modal routes */}
-      <AnimatePresence>
-        {cards && (
-          <Routes>
-            <Route path="/:type/:media/:time/all" element={<AllMoviesModal />} />
-          </Routes>
-        )}
-      </AnimatePresence>
+      {backgroundLocation && cards && (
+        <Routes location={location} key={location.pathname}>
+          <Route path="/*" element={<AllMoviesModal />} />
+        </Routes>
+      )}
     </LayoutGroup>
   );
 }

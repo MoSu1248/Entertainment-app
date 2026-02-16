@@ -12,13 +12,13 @@ export default function Search() {
   const navigate = useNavigate();
   const setSearchTerm = useSearchStore((state) => state.setSearchTerm);
   const setResults = useSearchStore((state) => state.setResults);
+  const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
   function handleSearching(search) {
     handleSearch(search);
     navigate(`/search`);
   }
 
-  const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
   const fetchSearchResults = async (query, page = 1) => {
     try {
       const encodedQuery = encodeURIComponent(query);

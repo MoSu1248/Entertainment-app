@@ -23,7 +23,7 @@ export default function Nav() {
   ];
 
   function onClick() {
-    (setResults(null), setSearchTerm(null));
+    (setResults(), setSearchTerm(""));
   }
 
   return (

@@ -3,9 +3,10 @@ import Heading from "../Heading/Heading";
 import Card from "../Card/Card";
 import "../Trending/Trending.scss";
 import { useLocation, useNavigate } from "react-router";
+import Arrow from "../../assets/arrow_icon.svg?react";
 import "./Row.scss";
 
-export default function Row({ endpoint, title, media }) {
+export default function Row({ endpoint, title, media, query }) {
   const [cards, setCards] = useState([]);
   const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
   const location = useLocation();
@@ -16,7 +17,7 @@ export default function Row({ endpoint, title, media }) {
     const fetchMovies = async () => {
       try {
         const res = await fetch(
-          `https://api.themoviedb.org/3/${endpoint}?api_key=${TMDB_API_KEY}&language=en-US&region=US&page=1`,
+          `https://api.themoviedb.org/3/${endpoint}?api_key=${TMDB_API_KEY}&language=en-US&region=US&page=1${query}`,
         );
         const data = await res.json();
         setCards(data.results);
@@ -31,12 +32,14 @@ export default function Row({ endpoint, title, media }) {
     fetchMovies();
   }, []);
 
+  console.log(endpoint);
+
   function handleClick() {
     element.style.overflowY = "hidden";
     console.log(endpoint);
-    
-    navigate(`/${endpoint}/all`, {
-      state: { cards: media },
+
+    navigate(`/${endpoint}`, {
+      state: { cards: media, background: location, genre: query },
     });
   }
 
@@ -44,12 +47,14 @@ export default function Row({ endpoint, title, media }) {
     <div className="trending">
       <div className="row">
         <Heading text={title} />
-        <button className="row__btn" onClick={() => handleClick()}>
-          Explore All
-        </button>
+        <div>
+          <button className="row__btn" onClick={() => handleClick()}>
+            <p>Explore All</p> <Arrow />
+          </button>
+        </div>
       </div>
       <div className="trending__grid">
-        {cards.slice(0, 10).map((item, index) => (
+        {cards?.slice(0, 10).map((item, index) => (
           <Card key={index} info={item} media={media} />
         ))}
       </div>

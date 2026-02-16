@@ -3,24 +3,31 @@ import "./AllMoviesModal.scss";
 import { useParams } from "react-router";
 import CardGrid from "../CardGrid/CardGrid";
 import CloseBtn from "../CloseBtn/CloseBtn";
-import { motion } from "motion/react";
+import Card from "../Card/Card";
+import { useLocation } from "react-router-dom";
+import ViewAll from "../ViewAll/ViewAll";
 
 export default function AllMoviesModal() {
   const [cardss, setCardss] = useState([]);
-  const { media, type, time } = useParams();
   const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
+  const { "*": endpoint } = useParams();
+  const [number, setNumber] = useState(1);
+  const location = useLocation();
 
-  const text = `${type.toLowerCase()}/${media.toLowerCase()}/${time.toLowerCase()}`;
-  console.log(type);
+  const cards = location.state?.cards;
+  const genre = location.state?.genre;
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
         const res = await fetch(
-          `https://api.themoviedb.org/3/${type}/${media}/${time}?api_key=${TMDB_API_KEY}&page=1`,
+          `https://api.themoviedb.org/3/${endpoint}?api_key=${TMDB_API_KEY}&page=${number}${genre}`,
         );
         const data = await res.json();
-        setCardss(data.results);
+        setCardss((prev) =>
+          number === 1 ? data.results : [...prev, ...data.results],
+        );
+        console.log(cardss);
       } catch (err) {
         console.error("Failed to fetch movies:", err);
         console.log(err);
@@ -30,16 +37,19 @@ export default function AllMoviesModal() {
     };
 
     fetchMovies();
-  }, [media]);
-
-  console.log(cardss);
+  }, [endpoint, number]);
 
   return (
     <div className="modalAll__wrapper">
-      <motion.div className="modalAll__container">
+      <div className="modalAll__container">
         <CloseBtn />
-        <CardGrid results={cardss} />
-      </motion.div>
+        <div className="card__grid">
+          {cardss?.map((movie, index) => (
+            <Card key={index} info={movie} media={cards} />
+          ))}
+        </div>
+        <ViewAll setNumber={setNumber} />
+      </div>
     </div>
   );
 }
