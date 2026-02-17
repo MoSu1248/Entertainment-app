@@ -1,14 +1,10 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useLoginStore } from "./components/Store/LoginStore";
-
 import Layout from "./components/Layout/Layout";
 import Home from "./pages/Home/Home";
 import CardGrid from "./components/CardGrid/CardGrid";
 import Login from "./pages/Login/Login";
-import MovieModal from "./components/MovieModal/MovieModal";
-import { useSearchStore } from "./components/Store/SearchStore";
-
 import ProtectedRoute from "./components/Routes/ProtectedRoute";
 import AuthOnlyRoute from "./components/Routes/AuthRoute";
 import { AnimatePresence, LayoutGroup } from "motion/react";
@@ -52,13 +48,6 @@ function App() {
         </Route>
       </Routes>
       {/* Modal routes */}
-      <AnimatePresence>
-        {backgroundLocation && (
-          <Routes>
-            <Route path="/:type/:id" element={<MovieModal />} />
-          </Routes>
-        )}
-      </AnimatePresence>
       {backgroundLocation && cards && (
         <Routes location={location} key={location.pathname}>
           <Route path="/*" element={<AllMoviesModal />} />

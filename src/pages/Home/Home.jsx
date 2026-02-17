@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import CardGrid from "../../components/CardGrid/CardGrid";
 import { useSearchStore } from "../../components/Store/SearchStore";
 import Row from "../../components/Row/Row";
+import Hero from "../../components/Hero/Hero";
 import "./Home.scss";
 
 export default function Home() {
@@ -38,6 +39,7 @@ export default function Home() {
 
   return (
     <div className="wrapper">
+      {!searchTerm && <Hero />}
       {searchTerm && (
         <CardGrid
           results={results}

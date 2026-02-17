@@ -8,6 +8,7 @@
   align-items: center;
   justify-content: center;
   overflow-y: scroll;
+  z-index: 100;
 
   .player__wrapper {
   }
@@ -50,17 +51,14 @@
     background-color: var(--primary-blue-950);
     height: fit-content;
     border-radius: 8px;
-    width: 40%;
+    width: 50%;
     color: var(--primary-white);
     min-height: 80%;
     position: relative;
 
-    .viewMore__btn{
+    .viewMore__btn {
       width: 100%;
-      
     }
-
-  
 
     .card__img {
       bottom: 0;

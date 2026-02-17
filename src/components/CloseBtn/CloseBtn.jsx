@@ -9,17 +9,16 @@ export default function CloseBtn() {
   const element = document.querySelector("body");
   const location = useLocation();
   const backgroundLocation = location.state?.background;
+ 
+
   function handleClose() {
     document.body.style.overflowY = "auto";
-
     if (backgroundLocation) {
-      // Navigate back to where the user actually was
       navigate(backgroundLocation.pathname, {
         replace: true,
-        state: { background: null, cards: null },
+        state: {},
       });
     } else {
-      // Fallback if they refreshed the page while the modal was open
       navigate(-1);
     }
   }

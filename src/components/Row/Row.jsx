@@ -5,6 +5,7 @@ import "../Trending/Trending.scss";
 import { useLocation, useNavigate } from "react-router";
 import Arrow from "../../assets/arrow_icon.svg?react";
 import "./Row.scss";
+import SkeletonLoader from "../SkeletonLoader/SkeletonLoader";
 
 export default function Row({ endpoint, title, media, query }) {
   const [cards, setCards] = useState([]);
@@ -12,6 +13,7 @@ export default function Row({ endpoint, title, media, query }) {
   const location = useLocation();
   const navigate = useNavigate();
   const element = document.querySelector("body");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -26,18 +28,15 @@ export default function Row({ endpoint, title, media, query }) {
         console.log(err);
       } finally {
         console.log("loading...");
+        setLoading(false)
       }
     };
 
     fetchMovies();
   }, []);
 
-  console.log(endpoint);
-
   function handleClick() {
     element.style.overflowY = "hidden";
-    console.log(endpoint);
-
     navigate(`/${endpoint}`, {
       state: { cards: media, background: location, genre: query },
     });
@@ -54,9 +53,15 @@ export default function Row({ endpoint, title, media, query }) {
         </div>
       </div>
       <div className="trending__grid">
-        {cards?.slice(0, 10).map((item, index) => (
-          <Card key={index} info={item} media={media} />
-        ))}
+        {cards
+          ?.slice(0, 10)
+          .map((item, index) =>
+            !loading ? (
+              <Card key={index} info={item} media={media} />
+            ) : (
+              <SkeletonLoader />
+            ),
+          )}
       </div>
     </div>
   );

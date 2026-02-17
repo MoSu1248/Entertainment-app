@@ -18,7 +18,7 @@ export default function Nav() {
     { type: "link", url: "/", icon: <NavHome /> },
     { type: "link", url: "/tv", icon: <NavSeries /> },
     { type: "link", url: "/movie", icon: <NavMovies /> },
-    { type: "link", url: "/bookmarked", icon: <NavBookmark /> },
+    // { type: "link", url: "/bookmarked", icon: <NavBookmark /> },
     // { type: "btn", action: logout, icon: <Logout /> },
   ];
 

@@ -3,24 +3,30 @@ import "./MovieModal.scss";
 import { Link, useParams } from "react-router";
 import { motion } from "motion/react";
 import { useNavigate } from "react-router-dom";
-import CloseBtn from "../CloseBtn/CloseBtn";
+import { useMovieModalStore } from "../Store/MovieModalStore";
+import CloseIcon from "../../assets/icon-close.svg?react";
 
 export default function MovieModal() {
-  const { id, type } = useParams();
   const [info, setInfo] = useState([]);
   const [trailerUrl, setTrailerUrl] = useState(null);
   const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
   const navigate = useNavigate();
   const element = document.querySelector("body");
+  const { modalId, modalState, modaltype } = useMovieModalStore();
+
+  const setModalStateClose = useMovieModalStore(
+    (state) => state.setModalStateClose,
+  );
 
   useEffect(() => {
     const fetchMovie = async () => {
       try {
         const res = await fetch(
-          `https://api.themoviedb.org/3/${type}/${id}?api_key=${TMDB_API_KEY}&append_to_response=videos`,
+          `https://api.themoviedb.org/3/${modaltype}/${modalId}?api_key=${TMDB_API_KEY}&append_to_response=videos`,
         );
         const data = await res.json();
         setInfo(data);
+        console.log(res);
 
         const trailer =
           data.videos?.results.find(
@@ -42,15 +48,12 @@ export default function MovieModal() {
     };
 
     fetchMovie();
-  }, [id, type]);
-  console.log(trailerUrl);
+  }, [modalId]);
 
   function handleClose() {
     element.style.overflowY = "visible";
     navigate(-1);
   }
-  const imageUrlBack = `https://image.tmdb.org/t/p/original${info.backdrop_path} `;
-  const imageUrlPoster = `https://image.tmdb.org/t/p/w780${info.poster_path}`;
 
   return (
     <div
@@ -63,12 +66,15 @@ export default function MovieModal() {
       <motion.div
         className="modal__container"
         transition={{ duration: 0.3 }}
-        layoutId={String(id)}
+        layoutId={String(modalId) || modalId}
         // initial={{ opacity: 0, scale: 0.95 }}
         // animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
       >
-        <CloseBtn />
+        {" "}
+        <button onClick={() => setModalStateClose()} className="close__btn">
+          <CloseIcon />
+        </button>
         {info && (
           <motion.div key={info.id}>
             {trailerUrl && (

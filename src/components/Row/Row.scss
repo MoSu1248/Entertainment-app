@@ -4,9 +4,10 @@
   display: flex;
   align-items: end;
   justify-content: start;
-  margin-top: 2rem;
-  margin-left: 2rem;
+
+  padding: 2rem 2rem 0rem;
   width: 100%;
+  overflow: hidden;
 
   &:hover {
     .row__btn {

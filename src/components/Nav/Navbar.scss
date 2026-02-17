@@ -11,6 +11,7 @@
 .navbar {
   padding: 0rem 1rem;
   height: 80vh;
+  z-index: 0;
 
   @include for-desktop-up {
     position: relative;

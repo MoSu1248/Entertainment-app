@@ -6,30 +6,36 @@ import Bookmark from "../../assets/icon-bookmark-empty.svg?react";
 import BookmarkedActive from "../../assets/icon-bookmark-full.svg?react";
 import { useSearchStore } from "../Store/SearchStore";
 import CardOverlay from "./CardOverlay";
+import { useMovieModalStore } from "../Store/MovieModalStore";
 
 export default function Card({ info, toggleBookmark, media, loading }) {
   const navigate = useNavigate();
   const location = useLocation();
   const [isHovered, setIsHovered] = useState(false);
   const searchTerm = useSearchStore((state) => state.searchTerm);
+  const setModalId = useMovieModalStore((state) => state.setModalId);
+  const setModalType = useMovieModalStore((state) => state.setModalType);
+  const { modalId, modalState, modaltype } = useMovieModalStore();
+
+  const setModalStateOpen = useMovieModalStore(
+    (state) => state.setModalStateOpen,
+  );
   const cards = location.state?.cards;
+  const background = location.state?.background;
 
   function handleClick(movieId) {
-    document.body.style.overflowY = "hidden";
-    navigate(`/${media}/${movieId}`, {
-      state: { background: location },
-    });
+    setModalType(media);
+    setModalStateOpen();
+    setModalId(movieId);
   }
 
   if (loading) {
     return;
   }
 
-  console.log(media);
-
   const imageUrl = searchTerm
     ? `https://image.tmdb.org/t/p/original${info.poster_path}`
-    : `https://image.tmdb.org/t/p/original${info.backdrop_path}`;
+    : `https://image.tmdb.org/t/p/w780${info.backdrop_path}`;
 
   const hasImage =
     info.media_type === "person"
@@ -38,7 +44,7 @@ export default function Card({ info, toggleBookmark, media, loading }) {
 
   return (
     <motion.div
-      layoutId={cards ? "" : String(info.id)}
+      layoutId={cards ? "" : String(info.id) || modalId}
       className={isHovered ? "card__hover" : "card_NotHover"}
     >
       <motion.div

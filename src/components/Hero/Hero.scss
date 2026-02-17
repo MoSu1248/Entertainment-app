@@ -1,0 +1,75 @@
+@use "../../styles/mixins" as *;
+
+.hero {
+  height: 72vh;
+  min-height: 72vh;
+  position: sticky;
+  top: 0;
+  left: 0;
+  margin-top: 1rem;
+  width: 100%;
+
+  &__overlay {
+    height: 100%;
+    width: 96%;
+    position: absolute;
+    margin-left: 2rem;
+    background: linear-gradient(to bottom left, transparent, #000000dc);
+    border-radius: 4px;
+
+    &:hover {
+      .hero__text {
+        opacity: 1;
+        transform: translate(10%, -50%);
+      }
+    }
+
+    .hero__text {
+      color: white;
+      position: absolute;
+      top: 60%;
+      left: 0%;
+      width: 30%;
+      display: flex;
+      transform: translate(10%, -30%);
+
+      gap: 2rem;
+      flex-direction: column;
+      opacity: 0;
+      transition: 0.3s ease;
+
+      &-header {
+        @include text-styling(
+          var(--primary-white),
+          var(--text-preset-1-size),
+          var(--font-weight-bold)
+        );
+      }
+      p {
+        @include text-styling(
+          var(--primary-white),
+          var(--text-preset-3-size),
+          var(--font-weight-regular)
+        );
+      }
+    }
+  }
+  img {
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 4px;
+    width: 96%;
+    position: absolute;
+    inset: 0;
+    margin-left: 2rem;
+  }
+
+  &__btn-container {
+    button {
+      @include button-styling;
+      font-size: 1rem;
+      padding: 1rem 2rem;
+    }
+  }
+}

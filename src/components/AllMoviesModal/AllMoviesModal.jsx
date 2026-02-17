@@ -6,6 +6,9 @@ import CloseBtn from "../CloseBtn/CloseBtn";
 import Card from "../Card/Card";
 import { useLocation } from "react-router-dom";
 import ViewAll from "../ViewAll/ViewAll";
+import MovieModal from "../MovieModal/MovieModal";
+import { useMovieModalStore } from "../Store/MovieModalStore";
+import SkeletonLoader from "../SkeletonLoader/SkeletonLoader";
 
 export default function AllMoviesModal() {
   const [cardss, setCardss] = useState([]);
@@ -13,6 +16,8 @@ export default function AllMoviesModal() {
   const { "*": endpoint } = useParams();
   const [number, setNumber] = useState(1);
   const location = useLocation();
+  const { modalId, modalState } = useMovieModalStore();
+  const [loading, setLoading] = useState(true);
 
   const cards = location.state?.cards;
   const genre = location.state?.genre;
@@ -32,7 +37,7 @@ export default function AllMoviesModal() {
         console.error("Failed to fetch movies:", err);
         console.log(err);
       } finally {
-        console.log("loading...");
+        setLoading(false);
       }
     };
 
@@ -44,9 +49,13 @@ export default function AllMoviesModal() {
       <div className="modalAll__container">
         <CloseBtn />
         <div className="card__grid">
-          {cardss?.map((movie, index) => (
-            <Card key={index} info={movie} media={cards} />
-          ))}
+          {cardss?.map((movie, index) =>
+            !loading ? (
+              <Card key={index} info={movie} media={cards} modalId={modalId} />
+            ) : (
+              <SkeletonLoader />
+            ),
+          )}
         </div>
         <ViewAll setNumber={setNumber} />
       </div>
