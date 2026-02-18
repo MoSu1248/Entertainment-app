@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { motion, easeInOut, AnimatePresence } from "motion/react";
 import { useNavigate, useLocation } from "react-router";
 import SkeletonLoader from "../SkeletonLoader/SkeletonLoader";
+import { useMovieModalStore } from "../Store/MovieModalStore";
 
 import "./Hero.scss";
 
-export default function Hero() {
+export default function Hero({ ref }) {
   const [banner, setBanner] = useState([]);
   const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -13,7 +14,12 @@ export default function Hero() {
   const navigate = useNavigate();
   const location = useLocation();
   const [loading, setLoading] = useState(true);
-
+  const { modalState } = useMovieModalStore();
+  const setModalId = useMovieModalStore((state) => state.setModalId);
+  const setModalType = useMovieModalStore((state) => state.setModalType);
+  const setModalStateOpen = useMovieModalStore(
+    (state) => state.setModalStateOpen,
+  );
   useEffect(() => {
     const fetchMovies = async () => {
       try {
@@ -45,28 +51,26 @@ export default function Hero() {
   }, [banner]);
   if (!currentBanner) return null;
 
-  function handleClick(movieId) {
-    document.body.style.overflowY = "hidden";
-    navigate(`/movie/${movieId}`, {
-      state: { background: location },
-    });
+  function handleClick(movieId, media) {
+    setModalType(media);
+    setModalStateOpen();
+    setModalId(movieId);
   }
 
   return (
     <div className="hero">
-      {loading ? (
+      {loading || !currentBanner ? (
         <SkeletonLoader />
       ) : (
         <AnimatePresence>
           <motion.img
+            key={currentBanner.title}
+            src={`https://image.tmdb.org/t/p/original${currentBanner.backdrop_path}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1 }}
-            key={currentBanner.title}
-            mode="wait"
-            src={`https://image.tmdb.org/t/p/original${currentBanner.backdrop_path}`}
-            alt=""
+            alt={currentBanner.title}
           />
           <div className="hero__overlay">
             <div className="hero__text">
@@ -74,8 +78,9 @@ export default function Hero() {
               <p>{currentBanner.overview}</p>
               <div className="hero__btn-container">
                 <button
-                  className="more"
-                  onClick={() => handleClick(currentBanner.id)}
+                  onClick={() =>
+                    handleClick(currentBanner.id, currentBanner.media_type)
+                  }
                 >
                   More Info
                 </button>

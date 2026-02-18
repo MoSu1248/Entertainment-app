@@ -14,13 +14,18 @@ export default function Row({ endpoint, title, media, query }) {
   const navigate = useNavigate();
   const element = document.querySelector("body");
   const [loading, setLoading] = useState(true);
+  const getRandomPage = (maxPages = 20) =>
+    Math.floor(Math.random() * maxPages) + 1;
+
+  const url =
+    title === "Trending" || title === "Upcoming"
+      ? `https://api.themoviedb.org/3/${endpoint}?api_key=${TMDB_API_KEY}&language=en-US&region=US&page=1${query}`
+      : `https://api.themoviedb.org/3/${endpoint}?api_key=${TMDB_API_KEY}&language=en-US&region=US&page=${getRandomPage(20)}${query}`;
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const res = await fetch(
-          `https://api.themoviedb.org/3/${endpoint}?api_key=${TMDB_API_KEY}&language=en-US&region=US&page=1${query}`,
-        );
+        const res = await fetch(url);
         const data = await res.json();
         setCards(data.results);
       } catch (err) {
@@ -28,7 +33,7 @@ export default function Row({ endpoint, title, media, query }) {
         console.log(err);
       } finally {
         console.log("loading...");
-        setLoading(false)
+        setLoading(false);
       }
     };
 

@@ -133,7 +133,7 @@ export default function CardGrid({ results }) {
               ),
             )}
       </div>
-      <ViewAll setNumber={setNumber} />
+      {!searchTerm && <ViewAll setNumber={setNumber} />}
     </div>
   );
 }

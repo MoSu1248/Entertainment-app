@@ -1,4 +1,4 @@
-.skeleton__card{
+.skeleton__card {
   background: #333;
   animation: pulse 1.4s ease-in-out infinite;
   height: 12vh;
@@ -22,15 +22,17 @@
 @keyframes pulse {
   0% {
     opacity: 0.6;
+  }
+  50% {
     opacity: 1;
+  }
+  100% {
     opacity: 0.6;
   }
 }
 
-
-.hero{
-
-  .skeleton__card{
+.hero {
+  .skeleton__card {
     height: 72vh;
   }
 }

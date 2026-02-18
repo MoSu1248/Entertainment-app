@@ -3,11 +3,18 @@
   gap: 2rem;
   display: flex;
   flex-direction: column;
+  min-height: 80vh;
 
   .grid__header {
     width: 100%;
     display: flex;
     justify-content: space-between;
+  }
+}
+
+.similar {
+  .card__grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
@@ -19,7 +26,7 @@
   gap: 1rem;
   overflow: visible;
   overflow-y: none;
-  min-height: 100%;
+  min-height: 80vh;
 
   @media (max-width: 1400px) {
     grid-template-columns: repeat(4, 1fr);

@@ -6,7 +6,7 @@ import Popup from "../Overlay/Popup";
 import "./Layout.scss";
 import Search from "../Search/Search";
 import { useMovieModalStore } from "../Store/MovieModalStore";
-import MovieModal from "../MovieModal/MovieModal";
+import MainModal from "../MovieModal/Main/MainModal";
 
 export default function Layout() {
   const { modalId, modalState } = useMovieModalStore();
@@ -22,7 +22,7 @@ export default function Layout() {
           <Outlet />
         </>
       </main>
-      {modalState && modalId && <MovieModal />}
+      {modalState && modalId && <MainModal />}
     </div>
   );
 }

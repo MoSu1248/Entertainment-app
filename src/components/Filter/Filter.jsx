@@ -23,8 +23,8 @@ export default function Filter({ setFilter, filter, setCards, type }) {
       )}
       <option value="romance">Romance</option>
       <option value="sci-fi">Sci-Fi</option>
-      <option value="top-rated">Top Rated</option>
-      <option value="latest">Latest</option>
+      <option value="thriller">Thriller</option>
+      {/* <option value="latest">Latest</option> */}
     </select>
   );
 }

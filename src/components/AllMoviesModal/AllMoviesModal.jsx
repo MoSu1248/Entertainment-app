@@ -6,7 +6,7 @@ import CloseBtn from "../CloseBtn/CloseBtn";
 import Card from "../Card/Card";
 import { useLocation } from "react-router-dom";
 import ViewAll from "../ViewAll/ViewAll";
-import MovieModal from "../MovieModal/MovieModal";
+import MovieModal from "../MovieModal/Main/MainModal";
 import { useMovieModalStore } from "../Store/MovieModalStore";
 import SkeletonLoader from "../SkeletonLoader/SkeletonLoader";
 
@@ -51,7 +51,7 @@ export default function AllMoviesModal() {
         <div className="card__grid">
           {cardss?.map((movie, index) =>
             !loading ? (
-              <Card key={index} info={movie} media={cards} modalId={modalId} />
+              <Card key={index} info={movie} media={cards} />
             ) : (
               <SkeletonLoader />
             ),

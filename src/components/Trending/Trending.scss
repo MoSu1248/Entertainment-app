@@ -5,11 +5,10 @@
     display: flex;
     gap: 0.3rem;
     overflow-x: auto;
-    overflow-y: visible;
     scroll-behavior: smooth;
     padding: 3rem 4rem 4rem 2rem;
     z-index: 1000;
-
+    min-height: 12rem;
     .trending__scroll {
     }
 
@@ -40,6 +39,7 @@
       height: 12rem;
       border-radius: 8px;
       position: relative;
+      min-height: 12rem;
 
       @include for-desktop-up {
         height: 10rem;
