@@ -4,6 +4,7 @@ import Nav from "./Nav";
 import Logo from "../../assets/logo.svg?react";
 import avatar from "../../assets/image-avatar.png";
 import Logout from "../../assets/logout.svg?react";
+import ThemeToggler from "../ThemeToggler/ThemeToggler";
 
 export default function Navbar() {
   return (
@@ -16,6 +17,7 @@ export default function Navbar() {
         {/* <button className="nav_logout">
           <Logout />
         </button> */}
+        <ThemeToggler />
         <div className="navbar__avatar">
           <img src={avatar} alt="" />
         </div>

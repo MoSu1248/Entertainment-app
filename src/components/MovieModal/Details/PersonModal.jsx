@@ -5,10 +5,15 @@ import "../Main/MainModal.scss";
 import { useMovieModalStore } from "../../Store/MovieModalStore";
 
 export default function PersonModal({ info, modalId }) {
-  console.log(info);
   const setModalStateClose = useMovieModalStore(
     (state) => state.setModalStateClose,
   );
+  const element = document.querySelector("body");
+
+  function closeHandler() {
+    element.style.overflowY = "visible";
+    setModalStateClose();
+  }
   return (
     <div className="modal__wrapper ">
       <motion.div
@@ -17,7 +22,7 @@ export default function PersonModal({ info, modalId }) {
         layoutId={String(modalId)}
         exit={{ opacity: 0, scale: 0.95 }}
       >
-        <button onClick={() => setModalStateClose()} className="close__btn">
+        <button onClick={() => closeHandler()} className="close__btn">
           <CloseIcon />
         </button>
         {info && (

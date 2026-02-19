@@ -13,14 +13,15 @@ export default function Card({ info, media }) {
   const searchTerm = useSearchStore((state) => state.searchTerm);
   const setModalId = useMovieModalStore((state) => state.setModalId);
   const setModalType = useMovieModalStore((state) => state.setModalType);
-  const { modalId, modalState, modaltype } = useMovieModalStore();
+  const { modalState } = useMovieModalStore();
+  const element = document.querySelector("body");
 
   const setModalStateOpen = useMovieModalStore(
     (state) => state.setModalStateOpen,
   );
 
-  
   function handleClick(movieId) {
+    element.style.overflowY = "hidden";
     setModalType(media);
     setModalStateOpen();
     setModalId(movieId);

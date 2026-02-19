@@ -1,3 +1,5 @@
+@use "../../styles/mixins" as *;
+
 .modalAll__wrapper {
   position: fixed;
   height: 100%;
@@ -9,6 +11,10 @@
   justify-content: center;
   overflow-y: scroll;
   padding: 1rem;
+
+  @include for-tablet-up {
+    padding: 2rem 0;
+  }
 
   &::-webkit-scrollbar {
     width: 6px;
@@ -34,6 +40,10 @@
     position: relative;
     padding: 1rem 3rem;
     margin-top: 1rem;
+
+    @include for-tablet-up {
+      padding: 1rem 1rem;
+    }
 
     .viewMore__container {
       width: 100%;

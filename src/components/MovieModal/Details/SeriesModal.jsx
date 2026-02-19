@@ -2,7 +2,8 @@ import "../Main/MainModal.scss";
 import { motion } from "motion/react";
 import { useMovieModalStore } from "../../Store/MovieModalStore";
 import CloseIcon from "../../../assets/icon-close.svg?react";
-import PersonModal from "../Details/PersonModal";
+import SimilarMovies from "../SimilarMovies";
+
 export default function SeriesModal({ info, trailerUrl }) {
   const element = document.querySelector("body");
   const { modalId } = useMovieModalStore();
@@ -10,6 +11,13 @@ export default function SeriesModal({ info, trailerUrl }) {
   const setModalStateClose = useMovieModalStore(
     (state) => state.setModalStateClose,
   );
+
+  function closeHandler() {
+    element.style.overflowY = "visible";
+    setModalStateClose();
+  }
+
+  console.log(info);
 
   return (
     <div className="modal__wrapper">
@@ -21,12 +29,12 @@ export default function SeriesModal({ info, trailerUrl }) {
         // animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
       >
-        <button onClick={() => setModalStateClose()} className="close__btn">
+        <button onClick={() => closeHandler()} className="close__btn">
           <CloseIcon />
         </button>
         {info && (
           <motion.div key={info.id}>
-            {trailerUrl && (
+            {trailerUrl ? (
               <div className="player__wrapper">
                 <iframe
                   key={trailerUrl}
@@ -38,20 +46,47 @@ export default function SeriesModal({ info, trailerUrl }) {
                   allowFullScreen
                 ></iframe>
                 <div className="overlay">
-                  <motion.h2
-                    initial={{ opacity: 1, y: 0 }}
-                    animate={{ opacity: 0, y: 10 }}
-                    transition={{ duration: 0.3, delay: 3 }}
-                  >
-                    {info.original_name}
-                  </motion.h2>
+                  <motion.h2>{info.name || info.original_name}</motion.h2>
+                </div>
+              </div>
+            ) : (
+              <div className="player__wrapper">
+                <img
+                  src={`https://image.tmdb.org/t/p/w780${info.backdrop_path || info.poster_path}`}
+                  alt=""
+                />
+                <div className="overlay">
+                  <motion.h2>{info.name || info.original_name} </motion.h2>
                 </div>
               </div>
             )}
             <div className="modal__content">
               <div className="modal__generalInfo">
                 <div className="modal__timeContainer">
-                  <p>{info.release_date}</p>
+                  <div className="modal_seriesText">
+                    <p className="modal__label">
+                      First Episode :
+                      <span className="modal__text">{info.first_air_date}</span>
+                    </p>
+                    <p className="modal__label">
+                      Last Episode :
+                      <span className="modal__text">{info.last_air_date}</span>
+                    </p>
+                  </div>
+                  <div className="modal_seriesText">
+                    <p className="modal__label">
+                      Number Of Seasons :
+                      <span className="modal__text">
+                        {info.number_of_seasons}
+                      </span>
+                    </p>
+                    <p className="modal__label">
+                      Number Of Episodes :
+                      <span className="modal__text">
+                        {info.number_of_episodes}
+                      </span>
+                    </p>
+                  </div>
                   {info.media_type === "movie" && <p>{info.runtime} mins</p>}
                 </div>
                 <h3>{info.tagline}</h3>
@@ -101,8 +136,8 @@ export default function SeriesModal({ info, trailerUrl }) {
               </div>
             </div>
           </motion.div>
-        )}{" "}
-        {/* <SimilarMovies movie_id={info.id} /> */}
+        )}
+        <SimilarMovies movie_id={info.id} />
       </motion.div>
     </div>
   );

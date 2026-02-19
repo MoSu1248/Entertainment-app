@@ -3,6 +3,7 @@ import "../Main/MainModal.scss";
 import { motion } from "motion/react";
 import { useMovieModalStore } from "../../Store/MovieModalStore";
 import CloseIcon from "../../../assets/icon-close.svg?react";
+import SimilarMovies from "../SimilarMovies";
 
 export default function MovieModal({ info, trailerUrl }) {
   const element = document.querySelector("body");
@@ -12,7 +13,10 @@ export default function MovieModal({ info, trailerUrl }) {
     (state) => state.setModalStateClose,
   );
 
-  console.log(info);
+  function closeHandler() {
+    element.style.overflowY = "visible";
+    setModalStateClose();
+  }
 
   return (
     <div className="modal__wrapper">
@@ -24,12 +28,12 @@ export default function MovieModal({ info, trailerUrl }) {
         // animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
       >
-        <button onClick={() => setModalStateClose()} className="close__btn">
+        <button onClick={() => closeHandler()} className="close__btn">
           <CloseIcon />
         </button>
         {info && (
           <motion.div key={info.id}>
-            {trailerUrl && (
+            {trailerUrl ? (
               <div className="player__wrapper">
                 <iframe
                   key={trailerUrl}
@@ -37,17 +41,21 @@ export default function MovieModal({ info, trailerUrl }) {
                   height="100%"
                   src={`${trailerUrl.replace("watch?v=", "embed/")}?autoplay=1&mute=0&controls=0&modestbranding=0`}
                   title="Movie Trailer"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allow="accelerometer;  clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 ></iframe>
                 <div className="overlay">
-                  <motion.h2
-                    initial={{ opacity: 1, y: 0 }}
-                    animate={{ opacity: 0, y: 10 }}
-                    transition={{ duration: 0.3, delay: 3 }}
-                  >
-                    {info.title || info.original__title || info.original_name}
-                  </motion.h2>
+                  <motion.h2>{info.title || info.original_title}</motion.h2>
+                </div>
+              </div>
+            ) : (
+              <div className="player__wrapper">
+                <img
+                  src={`https://image.tmdb.org/t/p/w780${info.backdrop_path || info.poster_path}`}
+                  alt=""
+                />
+                <div className="overlay">
+                  <motion.h2>{info.title || info.original_title}</motion.h2>
                 </div>
               </div>
             )}
@@ -55,7 +63,7 @@ export default function MovieModal({ info, trailerUrl }) {
               <div className="modal__generalInfo">
                 <div className="modal__timeContainer">
                   <p>{info.release_date}</p>
-                  {info.media_type === "movie" && <p>{info.runtime} mins</p>}
+                  <p>{info.runtime} mins</p>
                 </div>
                 <h3>{info.tagline}</h3>
                 <p className="modal__overview">{info.overview}</p>
@@ -105,7 +113,7 @@ export default function MovieModal({ info, trailerUrl }) {
             </div>
           </motion.div>
         )}
-        {/* <SimilarMovies movie_id={info.id} /> */}
+        <SimilarMovies movie_id={info.id} />
       </motion.div>
     </div>
   );

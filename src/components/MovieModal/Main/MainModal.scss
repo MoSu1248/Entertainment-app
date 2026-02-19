@@ -45,7 +45,7 @@
 
     h2 {
       position: absolute;
-      bottom: 1rem;
+      bottom: 3rem;
       left: 3rem;
       opacity: 0.8;
       @include text-styling(
@@ -53,6 +53,9 @@
         var(--text-preset-1-size),
         var(--font-weight-bold)
       );
+
+      font-size: 3rem;
+      width: 80%;
     }
   }
   &::-webkit-scrollbar {
@@ -78,8 +81,24 @@
     position: relative;
     margin: 5rem 0;
 
+    @media (max-width: 1400px) {
+      width: 70%;
+    }
+
+    @include for-desktop-up {
+      width: 90%;
+    }
+
+    @include for-tablet-up {
+      width: 85%;
+    }
+
+    .card__img-placeholder {
+      height: 50vh;
+    }
+
     .modal__content {
-      padding: 1rem 2rem 2rem 3rem;
+      padding: 2rem 3rem 2rem 3rem;
       display: flex;
       flex-direction: row;
       gap: 0.5rem;
@@ -108,6 +127,12 @@
           var(--text-preset-4-size),
           var(--font-weight-regular)
         );
+
+        .modal_seriesText {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
       }
 
       .modal__rightContainer {
@@ -191,7 +216,7 @@
       border-top-left-radius: 8px;
       width: 100%;
       position: relative;
-      min-height: 50vh;
+      height: 50vh;
       max-height: 60vh;
 
       &::after {
@@ -216,6 +241,28 @@
 
     .modal__content {
       padding: 2rem 3rem;
+    }
+  }
+}
+
+.similar {
+  padding: 3rem;
+  .similar__grid {
+    padding: 1rem 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(auto, 1fr);
+    gap: 1rem;
+    overflow: visible;
+    overflow-y: none;
+  }
+
+  .viewMore__container {
+    .viewMore__btn {
+      width: 3rem;
+      padding: 1rem;
+      svg {
+      }
     }
   }
 }

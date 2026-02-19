@@ -7,6 +7,7 @@ import "./Layout.scss";
 import Search from "../Search/Search";
 import { useMovieModalStore } from "../Store/MovieModalStore";
 import MainModal from "../MovieModal/Main/MainModal";
+import Footer from "../Footer/Footer";
 
 export default function Layout() {
   const { modalId, modalState } = useMovieModalStore();
@@ -23,6 +24,7 @@ export default function Layout() {
         </>
       </main>
       {modalState && modalId && <MainModal />}
+      <Footer />
     </div>
   );
 }

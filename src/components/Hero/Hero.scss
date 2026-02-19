@@ -4,8 +4,7 @@
   height: 72vh;
   min-height: 72vh;
   position: relative;
-  top: 0;
-  left: 0;
+
   margin-top: 1rem;
   width: 100%;
 
@@ -16,7 +15,14 @@
     margin-left: 2rem;
     background: linear-gradient(to bottom left, transparent, #000000dc);
     border-radius: 4px;
+    top: 0;
+    left: 0;
 
+    @include for-tablet-up {
+      width: 93%;
+      margin: 0 2rem;
+      margin-right: 2rem;
+    }
     &:hover {
       .hero__text {
         opacity: 1;
@@ -32,6 +38,10 @@
       width: 30%;
       display: flex;
       transform: translate(10%, -30%);
+
+      @include for-tablet-up {
+        width: 70%;
+      }
 
       gap: 2rem;
       flex-direction: column;
@@ -63,6 +73,11 @@
     position: absolute;
     inset: 0;
     margin-left: 2rem;
+    @include for-tablet-up {
+      width: 100%;
+      padding: 0 2rem;
+      margin: 0;
+    }
   }
 
   &__btn-container {
