@@ -14,7 +14,7 @@ export default function LoginContainer({ register }) {
     const users = JSON.parse(localStorage.getItem("users") || "[]");
 
     const userExists = users.find(
-      (u) => u.email === email && u.password === password
+      (u) => u.email === email && u.password === password,
     );
 
     if (userExists) {
@@ -23,6 +23,16 @@ export default function LoginContainer({ register }) {
     } else {
       alert("Invalid email or password");
     }
+  };
+
+  const handleGuest = (e) => {
+    e.preventDefault();
+    const users = JSON.parse(localStorage.getItem("users") || "[]");
+    setEmail("Guest");
+    setPassword("Guest");
+    users.push({ email, password });
+    login({ email });
+    navigate("/");
   };
 
   return (
@@ -47,9 +57,18 @@ export default function LoginContainer({ register }) {
           Login to your account
         </button>
       </form>
-      <div className="footer">
-        <p>Don’t have an account?</p>
-        <span onClick={register}>Sign Up</span>
+      <div className="container-footer ">
+        <p>
+          Don’t have an account?<span onClick={register}>Sign Up</span>
+        </p>
+      </div>
+      <div className="container-footer ">
+        <p>Or </p>
+      </div>
+      <div className="container-footer ">
+        <p>
+          Continue as a<span onClick={handleGuest}>Guest</span>
+        </p>
       </div>
     </div>
   );

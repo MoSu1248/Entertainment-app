@@ -28,7 +28,7 @@ export default function Register({ register }) {
     localStorage.setItem("users", JSON.stringify(users));
 
     login({ email });
-    navigate("/"); 
+    navigate("/");
   };
 
   return (
@@ -60,10 +60,11 @@ export default function Register({ register }) {
           Create an account
         </button>
       </form>
-      <div className="footer">
+      <div className="container-footer ">
         <p>Already have an account?</p>
         <span onClick={register}>Login</span>
-      </div>
+      </div>{" "}
+      
     </div>
   );
 }
