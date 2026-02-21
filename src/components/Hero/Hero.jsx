@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { motion, easeInOut, AnimatePresence } from "motion/react";
-import { useNavigate, useLocation } from "react-router";
+import { motion, AnimatePresence } from "motion/react";
 import SkeletonLoader from "../SkeletonLoader/SkeletonLoader";
 import { useMovieModalStore } from "../Store/MovieModalStore";
 
@@ -11,15 +10,14 @@ export default function Hero({ ref }) {
   const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
   const [currentIndex, setCurrentIndex] = useState(0);
   const currentBanner = banner[currentIndex];
-  const navigate = useNavigate();
-  const location = useLocation();
   const [loading, setLoading] = useState(true);
-  const { modalState } = useMovieModalStore();
   const setModalId = useMovieModalStore((state) => state.setModalId);
   const setModalType = useMovieModalStore((state) => state.setModalType);
   const setModalStateOpen = useMovieModalStore(
     (state) => state.setModalStateOpen,
   );
+  const element = document.querySelector("body");
+
   useEffect(() => {
     const fetchMovies = async () => {
       try {
@@ -52,6 +50,8 @@ export default function Hero({ ref }) {
   if (!currentBanner) return null;
 
   function handleClick(movieId, media) {
+    element.style.overflowY = "hidden";
+
     setModalType(media);
     setModalStateOpen();
     setModalId(movieId);

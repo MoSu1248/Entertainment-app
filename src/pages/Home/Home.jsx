@@ -21,9 +21,6 @@ export default function Home() {
         if (visibleRows < rows.length) {
           setVisibleRows((prev) => prev + 3);
         }
-        console.log("Element appeared in view", entry.target);
-      } else {
-        // console.log("Element left view", entry.target);
       }
     },
     { threshold: 1 },
@@ -36,24 +33,73 @@ export default function Home() {
     }, 50); // 50ms delay is usually enough
   }, []);
 
-const rows = [
-  { title: "Trending", endpoint: "trending/movie/week", media: "movie" },
-  { title: "Upcoming", endpoint: "movie/upcoming", media: "movie" },
-  { title: "Top Rated", endpoint: "movie/top_rated", media: "movie" },
-  { title: "Popular TV Series", endpoint: "tv/on_the_air", media: "tv" },
-  { title: "Top Rated TV Series", endpoint: "tv/top_rated", media: "tv" },
-  { title: "Horror", endpoint: "discover/movie", media: "movie", query: "&with_genres=27" },
-  { title: "Drama", endpoint: "discover/movie", media: "movie", query: "&with_genres=18" },
-  { title: "Sci-Fi", endpoint: "discover/movie", media: "movie", query: "&with_genres=878" },
-  { title: "Thriller", endpoint: "discover/movie", media: "movie", query: "&with_genres=53" },
-  { title: "Comedy", endpoint: "discover/movie", media: "movie", query: "&with_genres=35" },
-  { title: "Action", endpoint: "discover/movie", media: "movie", query: "&with_genres=28" },
-  { title: "Romance", endpoint: "discover/movie", media: "movie", query: "&with_genres=10749" },
-  { title: "Documentaries", endpoint: "discover/movie", media: "movie", query: "&with_genres=99" },
-  { title: "Family", endpoint: "discover/movie", media: "movie", query: "&with_genres=10751" },
-  { title: "Animation", endpoint: "discover/movie", media: "movie", query: "&with_genres=16" },
-];
-
+  const rows = [
+    { title: "Trending", endpoint: "trending/movie/week", media: "movie" },
+    { title: "Upcoming", endpoint: "movie/upcoming", media: "movie" },
+    { title: "Top Rated", endpoint: "movie/top_rated", media: "movie" },
+    { title: "Popular TV Series", endpoint: "tv/on_the_air", media: "tv" },
+    { title: "Top Rated TV Series", endpoint: "tv/top_rated", media: "tv" },
+    {
+      title: "Horror",
+      endpoint: "discover/movie",
+      media: "movie",
+      query: "&with_genres=27",
+    },
+    {
+      title: "Drama",
+      endpoint: "discover/movie",
+      media: "movie",
+      query: "&with_genres=18",
+    },
+    {
+      title: "Sci-Fi",
+      endpoint: "discover/movie",
+      media: "movie",
+      query: "&with_genres=878",
+    },
+    {
+      title: "Thriller",
+      endpoint: "discover/movie",
+      media: "movie",
+      query: "&with_genres=53",
+    },
+    {
+      title: "Comedy",
+      endpoint: "discover/movie",
+      media: "movie",
+      query: "&with_genres=35",
+    },
+    {
+      title: "Action",
+      endpoint: "discover/movie",
+      media: "movie",
+      query: "&with_genres=28",
+    },
+    {
+      title: "Romance",
+      endpoint: "discover/movie",
+      media: "movie",
+      query: "&with_genres=10749",
+    },
+    {
+      title: "Documentaries",
+      endpoint: "discover/movie",
+      media: "movie",
+      query: "&with_genres=99",
+    },
+    {
+      title: "Family",
+      endpoint: "discover/movie",
+      media: "movie",
+      query: "&with_genres=10751",
+    },
+    {
+      title: "Animation",
+      endpoint: "discover/movie",
+      media: "movie",
+      query: "&with_genres=16",
+    },
+  ];
 
   return (
     <div className="wrapper">

@@ -28,7 +28,10 @@
     transition: all 0.3s ease;
     cursor: pointer;
     padding: 0.5rem;
-
+    background-color: transparent;
+    border: none;
+    height: 100%;
+    min-height: 3rem;
 
 
     &:hover {

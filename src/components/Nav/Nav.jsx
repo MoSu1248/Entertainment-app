@@ -5,12 +5,10 @@ import NavHome from "../../assets/icon-nav-home.svg?react";
 import NavBookmark from "../../assets/icon-nav-bookmark.svg?react";
 import NavMovies from "../../assets/icon-nav-movies.svg?react";
 import NavSeries from "../../assets/icon-nav-tv-series.svg?react";
-import Logout from "../../assets/logout.svg?react";
 import { useOverlayStore } from "../Store/useOverlayStore";
 import { useSearchStore } from "../Store/SearchStore";
 
 export default function Nav() {
-  const logout = useOverlayStore((state) => state.showLogout);
   const setSearchTerm = useSearchStore((state) => state.setSearchTerm);
   const setResults = useSearchStore((state) => state.setResults);
 
@@ -40,7 +38,7 @@ export default function Nav() {
                 {link.icon}
               </NavLink>
             ) : (
-              <p to={link.url} className={`nav__link`} onClick={link.action}>
+              <p  className={`nav__link`} onClick={link.action}>
                 {link.icon}
               </p>
             )}

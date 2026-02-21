@@ -13,6 +13,7 @@
   font-weight: $font-weight;
   letter-spacing: $letter-spacing;
   line-height: var(--text-line-height);
+  transition: 1s ease;
 }
 
 @mixin button-styling {

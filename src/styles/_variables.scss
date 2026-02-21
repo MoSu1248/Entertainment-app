@@ -1,4 +1,4 @@
-:root {
+[data-theme="dark"]:root {
   /* COLORS */
   --primary-white: #ffffff;
   --primary-black: #000000;
@@ -9,7 +9,55 @@
   --primary-grey: #979797;
   --primary-grey-light: #97979788;
   --primary-grey-dark: #25252586;
+  --primary-gradient: #fc4747;
 
+  /* Typography */
+  --primary-font: "Outfit", sans-serif;
+
+  /* Font Sizing Normal*/
+
+  --text-preset-1-size: 2rem;
+  --text-preset-2-size: 1.5rem;
+  --text-preset-3-size: 1.125rem;
+  --text-preset-4-size: 0.938rem;
+  --text-preset-5-size: 0.813rem;
+
+  /* Font Sizing Mobile*/
+
+  --text-preset-1-size-mobile: 1.5rem;
+  --text-preset-2-size-mobile: 1rem;
+  --text-preset-3-size-mobile: 0.938rem;
+  --text-preset-4-size-mobile: 0.875rem;
+  --text-preset-5-size-mobile: 0.75rem;
+  --text-preset-6-size-mobile: 0.688rem;
+
+  /* Line Height */
+  --text-line-height: 1.25;
+
+  /* Letter Spacing */
+  --text-preset-1-spacing: -0.5px;
+  --text-preset-1-spacing-mobile: -0.3px;
+  --text-preset-1-spacing-other: 0px;
+
+  /* Font Weights */
+
+  --font-weight-thin: 200;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+}
+
+[data-theme="light"]:root {
+  /* COLORS */
+  --primary-white: #272626;
+  --primary-black: #000000;
+  --primary-blue-950: #ffffff;
+  --primary-blue-900: #5a698f;
+  --primary-blue-500: #979797d7;
+  --primary-red-500: #fc4747;
+  --primary-grey: #979797;
+  --primary-grey-light: #979797cb;
+  --primary-grey-dark: #25252586;
   --primary-gradient: #fc4747;
 
   /* Typography */

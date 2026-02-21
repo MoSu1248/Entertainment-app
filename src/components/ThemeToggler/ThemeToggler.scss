@@ -1,5 +1,4 @@
 .themeToggler {
-  margin-top: auto;
   &__container {
     background-color: var(--bg-app);
     height: 2.5rem;
@@ -39,5 +38,22 @@
 
   &.toggle-dark::after {
     transform: translate(28px);
+  }
+}
+
+.nav__link {
+  color: var(--primary-blue-500);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  padding: 0.5rem;
+  background-color: transparent;
+  border: none;
+
+  &:hover {
+    color: var(--primary-red-500);
+  }
+
+  &.active {
+    color: var(--primary-white);
   }
 }

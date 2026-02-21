@@ -9,6 +9,7 @@ import ProtectedRoute from "./components/Routes/ProtectedRoute";
 import AuthOnlyRoute from "./components/Routes/AuthRoute";
 import { AnimatePresence, LayoutGroup } from "motion/react";
 import AllMoviesModal from "./components/AllMoviesModal/AllMoviesModal";
+import { ThemeStore } from "./components/Store/ThemeStore";
 
 function App() {
   const loadUser = useLoginStore((state) => state.loadUser);
@@ -20,6 +21,16 @@ function App() {
   useEffect(() => {
     loadUser();
   }, []);
+
+  const { theme } = ThemeStore();
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+
+  console.log(theme);
+  
 
   return (
     <LayoutGroup>
