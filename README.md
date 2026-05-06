@@ -1,6 +1,6 @@
 # Project Name
 
-![Project Preview](./preview.png)
+![Project Preview](./src/assets/screenshots/Homepage.png)
 
 ## Overview
 
@@ -48,8 +48,8 @@ npm run dev
 
 ## Screenshots
 
-![Screenshot 1](./screenshots/home.png)
-![Screenshot 2](./screenshots/detail.png)
+![Screenshot 1](./src/assets/screenshots/modal.png)
+![Screenshot 2](./src/assets/screenshots/mobile.png)
 
 ## Author
 
