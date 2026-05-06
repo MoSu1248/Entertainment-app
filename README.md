@@ -1,5 +1,4 @@
-# Project Name
-
+# CineFlow
 ![Project Preview](./src/assets/screenshots/Homepage.png)
 
 ## Overview
