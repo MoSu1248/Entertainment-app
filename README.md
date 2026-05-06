@@ -1,18 +1,56 @@
-# React + Vite
+# Project Name
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Project Preview](./preview.png)
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+CineFlow is a Netflix-inspired movie discovery platform built with React, designed to replicate a modern streaming experience with real-time interactivity and smooth UI transitions. The goal of the project was to explore advanced React patterns, API integration, and dynamic UI behaviour in a real-world styled application.
 
-## React Compiler
+## Live Demo
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+🔗 [Live Site](https://mscineflow.netlify.app/) · [GitHub Repo]([https://github.com/MoSu1248/your-repo](https://github.com/MoSu1248/Entertainment-app))
 
-Note: This will impact Vite dev & build performances.
+## Built With
 
-## Expanding the ESLint configuration
+- React
+- JavaScript
+- SCSS
+- Zustand
+- Firebase / Firestore
+- Framer Motion
+- Vite
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Features
+
+-Netflix-inspired movie browsing experience built with React
+-Real-time search and filtering across categorized movie content
+-Interactive hover cards with instant trailer previews
+-Dynamic modal view with full trailer playback + movie details
+-“Similar movies” suggestions for deeper discovery
+-Authentication system (login & registration flows)
+-Live movie data integration via external APIs
+-Global state management for smooth dynamic UI updates
+-Fully responsive design optimized for all screen sizes
+-Modern streaming-platform UI/UX inspired by Netflix
+
+## Getting Started
+
+```bash
+# Clone the repo
+git clone https://github.com/MoSu1248/your-repo.git
+
+# Install dependencies
+npm install
+
+# Run locally
+npm run dev
+```
+
+## Screenshots
+
+![Screenshot 1](./screenshots/home.png)
+![Screenshot 2](./screenshots/detail.png)
+
+## Author
+
+Mohammed Suhail Rahman · [Portfolio](https://mscreatdev.netlify.app/) · [GitHub](https://github.com/MoSu1248)
