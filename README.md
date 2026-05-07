@@ -7,7 +7,7 @@ CineFlow is a Netflix-inspired movie discovery platform built with React, design
 
 ## Live Demo
 
-🔗 [Live Site](https://mscineflow.netlify.app/) · [GitHub Repo]([https://github.com/MoSu1248/your-repo](https://github.com/MoSu1248/Entertainment-app))
+🔗 [Live Site](https://mscineflow.netlify.app/) · [GitHub Repo](https://github.com/MoSu1248/Entertainment-app)
 
 ## Built With
 
